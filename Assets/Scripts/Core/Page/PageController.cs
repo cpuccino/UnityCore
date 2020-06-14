@@ -40,7 +40,7 @@ namespace Ukiyo.Unity.Core.Page
             if(pageToShowType == PageType.None) return;
             if(!PageMap.ContainsKey(pageToShowType))
             {
-                Debug.LogWarning($"You are trying to show a page [{Enum.GetName(typeof(PageType), pageToShowType)}] that has not been registered");
+                Debug.LogWarning($"You are trying to show a page [{pageToShowType.ToString()}] that has not been registered");
                 return;
             }
 
@@ -54,7 +54,7 @@ namespace Ukiyo.Unity.Core.Page
             if(pageToHideType == PageType.None) return;
             if(!PageMap.ContainsKey(pageToHideType))
             {
-                Debug.LogWarning($"You are trying to hide a page [{Enum.GetName(typeof(PageType), pageToHideType)}] that has not been registered");
+                Debug.LogWarning($"You are trying to hide a page [{pageToHideType.ToString()}] that has not been registered");
                 return; 
             }
 
@@ -80,7 +80,7 @@ namespace Ukiyo.Unity.Core.Page
         IEnumerator WaitForPageExit(Page pageToHide, Page pageToShow)
         {
             yield return null;
-            while(pageToHide.State != PageState.None)
+            while(pageToHide.AnimationState != PageAnimationState.None)
             {
                 yield return null;
             }
@@ -102,18 +102,18 @@ namespace Ukiyo.Unity.Core.Page
             if(!PageMap.ContainsKey(page.Type))
             {
                 PageMap.Add(page.Type, page);
-                Debug.Log($"Page [{Enum.GetName(typeof(PageType), page.Type)}] has been successfully registered");
+                Debug.Log($"Page [{page.Type.ToString()}] has been successfully registered");
                 return;
             }
 
-            Debug.LogWarning($"Page [{Enum.GetName(typeof(PageType), page.Type)}] has already been registered");
+            Debug.LogWarning($"Page [{page.Type.ToString()}] has already been registered");
         }
 
         Page GetPage(PageType type)
         {
             if(!PageMap.ContainsKey(type))
             {
-                Debug.LogWarning($"You are trying to get a page [{Enum.GetName(typeof(PageType), type)}] that has not been registered");
+                Debug.LogWarning($"You are trying to get a page [{type.ToString()}] that has not been registered");
                 return null;
             }
 
@@ -124,7 +124,7 @@ namespace Ukiyo.Unity.Core.Page
         {
             if(!PageMap.ContainsKey(type))
             {
-                Debug.LogWarning($"You are trying to detect if a page is active [{Enum.GetName(typeof(PageType), type)}], but it's not registered");
+                Debug.LogWarning($"You are trying to detect if a page is active [{type.ToString()}], but it's not registered");
                 return false;
             }
 
