@@ -40,7 +40,7 @@ namespace Ukiyo.Unity.Core.Page
             if(Input.GetKeyUp(KeyCode.Return))
             {
                 Debug.Log("Hiding All Pages");
-                PageType[] pageTypes = Enum.GetValues(typeof(PageType)).Cast<PageType>().ToArray();
+                var pageTypes = Enum.GetValues(typeof(PageType)).Cast<PageType>().ToArray();
                 foreach (PageType pageType in pageTypes)
                 {
                     pageController.HidePage(pageType);
