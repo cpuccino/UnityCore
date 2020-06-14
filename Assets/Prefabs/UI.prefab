@@ -181,7 +181,7 @@ RectTransform:
   - {fileID: 536876490}
   - {fileID: 1516011303}
   m_Father: {fileID: 6564238494369585151}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -266,7 +266,7 @@ RectTransform:
   - {fileID: 726051682}
   - {fileID: 2112757452}
   m_Father: {fileID: 6564238494369585151}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -524,8 +524,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   __enable: 0
   pageController: {fileID: 5881089582426810324}
-  page0: {fileID: 804085533}
-  page1: {fileID: 994572483}
+  page0: {fileID: 994572483}
+  page1: {fileID: 804085533}
 --- !u!1 &4689247319177661214
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,8 +558,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 3205438550945224883}
-  - {fileID: 804085530}
   - {fileID: 994572486}
+  - {fileID: 804085530}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

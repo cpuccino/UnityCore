@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace Ukiyo.Unity.Core.Page
 {
-    public enum PageState
+    // Whether the page is transitioning on, off or neutral
+    // Must match the animation state
+    public enum PageAnimationState
     {
         None, On, Off
     }
@@ -13,35 +15,15 @@ namespace Ukiyo.Unity.Core.Page
     {
         Animator animator;
 
-        public PageState State { get; private set; }
+        public PageAnimationState AnimationState { get; private set; }
+
+        public bool Active { get; private set; }
 
         [SerializeField] PageType type;
         public PageType Type { get { return type; } set { type = value; } }
 
         [SerializeField] bool useAnimation;
         public bool UseAnimation { get { return useAnimation; } }
-
-        private bool active;
-
-        public bool Active 
-        { 
-            get 
-            { 
-                return active; 
-            } 
-            set 
-            {
-                if(!value)
-                {
-                    active = false;
-                    gameObject.SetActive(false);
-                }
-                else
-                {
-                    active = true;
-                }
-            }
-        }
 
         void OnEnable()
         {
@@ -61,16 +43,14 @@ namespace Ukiyo.Unity.Core.Page
                 StartCoroutine(AwaitAnimation(transitionOn));
                 return;
             }
-            Active = transitionOn;
+            SetActive(transitionOn);
         }
 
         IEnumerator AwaitAnimation(bool transitionOn)
         {
-            State = transitionOn ? PageState.On : PageState.Off;
-            
-            string state = Enum.GetName(typeof(PageState), State);
+            AnimationState = transitionOn ? PageAnimationState.On : PageAnimationState.Off;
 
-            while(!animator.GetCurrentAnimatorStateInfo(0).IsName(state))
+            while(!animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationState.ToString()))
             {
                 yield return null;
             }
@@ -80,8 +60,18 @@ namespace Ukiyo.Unity.Core.Page
                 yield return null;
             }
 
-            State = PageState.None;
-            Active = transitionOn;
+            AnimationState = PageAnimationState.None;
+            SetActive(transitionOn);
         }
+
+        private void SetActive(bool transitionOn)
+        {
+            Active = transitionOn;
+            if(!transitionOn)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
     }
 }
