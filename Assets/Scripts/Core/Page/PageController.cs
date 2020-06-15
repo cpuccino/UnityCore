@@ -9,10 +9,8 @@ namespace Ukiyo.Unity.Core.Page
     {
         static PageController instance;
 
-        Dictionary<PageType, Page> PageMap;
-
+        Dictionary<PageType, Page> pageMap;
         [SerializeField] PageType initialPage;
-
         [SerializeField] Page[] pages;
 
         void Awake()
@@ -25,7 +23,7 @@ namespace Ukiyo.Unity.Core.Page
             if(instance == null)
             {
                 instance = this;
-                PageMap = new Dictionary<PageType, Page>();
+                pageMap = new Dictionary<PageType, Page>();
                 RegisterPages();
 
                 if(initialPage != PageType.None)
@@ -91,9 +89,9 @@ namespace Ukiyo.Unity.Core.Page
 
         void RegisterPage(Page page)
         {
-            if(!PageMap.ContainsKey(page.Type))
+            if(!pageMap.ContainsKey(page.Type))
             {
-                PageMap.Add(page.Type, page);
+                pageMap.Add(page.Type, page);
                 Debug.Log($"Page [{page.Type.ToString()}] has been successfully registered");
                 return;
             }
@@ -103,13 +101,13 @@ namespace Ukiyo.Unity.Core.Page
 
         Page GetPage(PageType type, string operation = "access")
         {
-            if(!PageMap.ContainsKey(type))
+            if(!pageMap.ContainsKey(type))
             {
                 Debug.LogWarning($"You are trying to {operation} a page [{type.ToString()}] that has not been registered");
                 return null;
             }
 
-            return PageMap[type];
+            return pageMap[type];
         }
 
         public bool IsPageActive(PageType type)
@@ -117,7 +115,7 @@ namespace Ukiyo.Unity.Core.Page
             var page = GetPage(type);
             if(page == null) return false;
 
-            return PageMap[type].Active;
+            return pageMap[type].Active;
         }
     }
 }

@@ -6,7 +6,6 @@ namespace Ukiyo.Unity.Core.Utilities
     public abstract class MaterialColorBase
     {
         public Color32 Primary { get; }
-
         Dictionary<int, Color32> swatch;
 
         protected Color32 GetSwatchColor(int index)
