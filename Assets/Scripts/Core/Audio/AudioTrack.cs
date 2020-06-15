@@ -1,19 +1,15 @@
-﻿namespace Ukiyo.Unity.Core.Audio
+﻿using System;
+using UnityEngine;
+
+namespace Ukiyo.Unity.Core.Audio
 {
-    public enum AudioTaskAction
+    [Serializable]
+    public class AudioTrack
     {
-        Start, Stop, Restart
+        [SerializeField] AudioSource source;
+        [SerializeField] AudioObject[] audios;
+
+        public AudioSource Source => source;
+        public AudioObject[] Audios => audios;
     }
-
-    public class AudioTask
-    {
-        public AudioTaskAction Action { get; }
-        public AudioType Type { get; }
-
-        public AudioTask(AudioTaskAction action, AudioType type)
-        {
-            Action = action;
-            Type = type;
-        }
-    } 
 }

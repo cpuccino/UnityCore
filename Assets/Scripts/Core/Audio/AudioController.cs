@@ -9,7 +9,7 @@ namespace Ukiyo.Unity.Core.Audio
 {
     public class AudioController : Singleton<AudioController>
     {
-        [NaughtyAttributes.ReorderableList][SerializeField] AudioTrack[] tracks;
+        [SerializeField] AudioTrack[] tracks;
         Dictionary<AudioType, AudioTrack> tracksMap;
         Dictionary<AudioType, IEnumerator> taskQueueMap;
 
@@ -124,22 +124,39 @@ namespace Ukiyo.Unity.Core.Audio
 
             StopCoroutine(audioTask);
             taskQueueMap.Remove(type);
-
-            // finish current playing animation and transition volume -> fade
-            // get audio task, transition volume -> after volume <= 0 -> stopcoroutine
         }
 
         IEnumerator RunAudioTask(AudioTask task)
         {
+            yield return new WaitForSeconds(task.Options.Delay);
+
             var audioTrack = GetAudioTrack(task.Type, "RUN_AUDIO_TASK");
             audioTrack.Source.clip = GetAudioClipFromTrack(task.Type, audioTrack, "RUN_AUDIO_TASK");
 
+            HandleAudioTask(audioTrack, task);
+
+            var fadeFromStart = task.Action == AudioTaskAction.Start || task.Action == AudioTaskAction.Restart;
+            StartCoroutine(FadeTrackVolume(audioTrack, fadeFromStart, task.Options.Duration, () => 
+                { 
+                    if(task.Action == AudioTaskAction.Stop) audioTrack.Source.Stop();
+
+                    var queuedTasks = taskQueueMap.ToArray().Aggregate("", (acc, curr) => acc + curr.Key.ToString() + " ");
+                    taskQueueMap.Remove(task.Type);
+                    Debug.Log($"Queued tasks: {taskQueueMap.Count} [{queuedTasks}]");
+                }
+            ));
+        }
+
+        void HandleAudioTask(AudioTrack audioTrack, AudioTask task)
+        {
             switch(task.Action)
             {
-                case AudioTaskAction.Start: audioTrack.Source.Play();
+                case AudioTaskAction.Start:
+                    audioTrack.Source.Play();
                     break;
                 case AudioTaskAction.Stop:
-                    audioTrack.Source.Stop();
+                    if(task.Options.Duration < Double.Epsilon)
+                        audioTrack.Source.Stop();
                     break;
                 case AudioTaskAction.Restart:
                     audioTrack.Source.Stop();
@@ -148,11 +165,24 @@ namespace Ukiyo.Unity.Core.Audio
                 default:
                     break;
             }
+        }
 
-            taskQueueMap.Remove(task.Type);
-            Debug.Log($"Queued tasks: {taskQueueMap.Count}");
+        IEnumerator FadeTrackVolume(AudioTrack audioTrack, bool start = false, float duration = 0, Action callback = null)
+        {
+            if(duration < Double.Epsilon) yield return null;
 
-            yield return null;
+            float initial = start ? 0 : 1;
+            float target = start ? 1 : 0;
+            float timer = 0;
+
+            while(timer < duration)
+            {
+                audioTrack.Source.volume = Mathf.Lerp(initial, target, timer / duration);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            if(callback != null) callback();
         }
 
         void OnDisable()
@@ -163,19 +193,19 @@ namespace Ukiyo.Unity.Core.Audio
             }
         }
 
-        public void PlayAudio(AudioType type)
+        public void PlayAudio(AudioType type, AudioTaskOptions? options = null)
         {
-            AddAudioTask(new AudioTask(AudioTaskAction.Start, type));
+            AddAudioTask(new AudioTask(AudioTaskAction.Start, type, options));
         }
 
-        public void StopAudio(AudioType type)
+        public void StopAudio(AudioType type, AudioTaskOptions? options = null)
         {
-            AddAudioTask(new AudioTask(AudioTaskAction.Stop, type));
+            AddAudioTask(new AudioTask(AudioTaskAction.Stop, type, options));
         }
 
-        public void RestartAudio(AudioType type)
+        public void RestartAudio(AudioType type, AudioTaskOptions? options = null)
         {
-            AddAudioTask(new AudioTask(AudioTaskAction.Restart, type));
+            AddAudioTask(new AudioTask(AudioTaskAction.Restart, type, options));
         }
     }
 }

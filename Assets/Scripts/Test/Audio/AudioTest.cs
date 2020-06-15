@@ -12,6 +12,9 @@ namespace Ukiyo.Unity.Core.Audio
         [SerializeField] AudioType audioType0;
         [SerializeField] AudioType audioType1;
 
+        [SerializeField] float delay;
+        [SerializeField] float fadeDuration;
+
         #if UNITY_EDITOR
         void Awake()
         {
@@ -24,14 +27,18 @@ namespace Ukiyo.Unity.Core.Audio
         void Update()
         {
             if(!enable) return;
+
+            var audioTaskOptions = new AudioTaskOptions();
+            audioTaskOptions.Delay = delay;
+            audioTaskOptions.Duration = fadeDuration;
             
             if(Input.GetKeyUp(KeyCode.A))
             {
-                audioController.PlayAudio(audioType0);
+                audioController.PlayAudio(audioType0, audioTaskOptions);
             }
             if(Input.GetKeyUp(KeyCode.S))
             {
-                audioController.StopAudio(audioType0);
+                audioController.StopAudio(audioType0, audioTaskOptions);
             }
             if(Input.GetKeyUp(KeyCode.D))
             {
