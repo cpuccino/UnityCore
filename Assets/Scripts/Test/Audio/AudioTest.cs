@@ -4,9 +4,6 @@ namespace Ukiyo.Unity.Core.Audio
 {
     public class AudioTest : MonoBehaviour
     {
-        [SerializeField] bool __enable;
-        bool enable;
-
         [SerializeField] AudioController audioController;
 
         [SerializeField] AudioType audioType0;
@@ -18,16 +15,17 @@ namespace Ukiyo.Unity.Core.Audio
         #if UNITY_EDITOR
         void Awake()
         {
-            enable = __enable;
-            if(!enable) return;
-
             Debug.Log("Audio Test Attached");
         }
 
         void Update()
         {
-            if(!enable) return;
-
+            HandleAudio0Input();
+            HandleAudio1Input();
+        }
+        
+        void HandleAudio0Input()
+        {
             var audioTaskOptions = new AudioTaskOptions();
             audioTaskOptions.Delay = delay;
             audioTaskOptions.Duration = fadeDuration;
@@ -44,7 +42,10 @@ namespace Ukiyo.Unity.Core.Audio
             {
                 audioController.RestartAudio(audioType0);
             }
+        }
 
+        void HandleAudio1Input()
+        {
             if(Input.GetKeyUp(KeyCode.F))
             {
                 audioController.PlayAudio(audioType1);

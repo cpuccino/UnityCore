@@ -386,6 +386,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1097797664 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 260737906671063341, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
+    type: 3}
+  m_PrefabInstance: {fileID: 7950068513866409079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &1097797665
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097797664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1982352594 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 804085533, guid: 70f4231800a14a84f9d96b8f819473a9,

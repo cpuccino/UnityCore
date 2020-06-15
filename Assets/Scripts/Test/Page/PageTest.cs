@@ -7,9 +7,6 @@ namespace Ukiyo.Unity.Core.Page
     // Replace with automated tests
     public class PageTest : MonoBehaviour
     {
-        [SerializeField] bool __enable;
-        bool enable;
-
         [SerializeField] PageController pageController;
 
         [SerializeField] Page page0;
@@ -18,16 +15,11 @@ namespace Ukiyo.Unity.Core.Page
         #if UNITY_EDITOR
         void Awake()
         {
-            enable = __enable;
-            if(!enable) return;
-            
             Debug.Log("Page Test Attached");
         }
 
         void Update()
         {
-            if(!enable) return;
-
             HandlePageResetInput();
             HandlePage0Input();
             HandlePage1Input();
