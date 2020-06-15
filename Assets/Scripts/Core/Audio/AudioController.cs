@@ -140,9 +140,10 @@ namespace Ukiyo.Unity.Core.Audio
                 { 
                     if(task.Action == AudioTaskAction.Stop) audioTrack.Source.Stop();
 
-                    var queuedTasks = taskQueueMap.ToArray().Aggregate("", (acc, curr) => acc + curr.Key.ToString() + " ");
+                    var queuedTasks = taskQueueMap.ToArray().Aggregate("", (acc, curr) => acc + $"[{curr.Key.ToString()}] ");
                     taskQueueMap.Remove(task.Type);
-                    Debug.Log($"Queued tasks: {taskQueueMap.Count} [{queuedTasks}]");
+                    Debug.Log($"Task: {queuedTasks}");
+                    Debug.Log($"Queued tasks: {taskQueueMap.Count}");
                 }
             ));
         }
@@ -169,17 +170,18 @@ namespace Ukiyo.Unity.Core.Audio
 
         IEnumerator FadeTrackVolume(AudioTrack audioTrack, bool start = false, float duration = 0, Action callback = null)
         {
-            if(duration < Double.Epsilon) yield return null;
-
-            float initial = start ? 0 : 1;
-            float target = start ? 1 : 0;
-            float timer = 0;
-
-            while(timer < duration)
+            if(duration > Double.Epsilon)
             {
-                audioTrack.Source.volume = Mathf.Lerp(initial, target, timer / duration);
-                timer += Time.deltaTime;
-                yield return null;
+                float initial = start ? 0 : 1;
+                float target = start ? 1 : 0;
+                float timer = 0;
+
+                while(timer < duration)
+                {
+                    audioTrack.Source.volume = Mathf.Lerp(initial, target, timer / duration);
+                    timer += Time.deltaTime;
+                    yield return null;
+                }
             }
 
             if(callback != null) callback();
