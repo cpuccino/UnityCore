@@ -8,13 +8,11 @@ namespace Ukiyo.Unity.Core.Page
     public class PageTest : MonoBehaviour
     {
         [SerializeField] bool __enable;
-
         bool enable;
 
-        public PageController pageController;
+        [SerializeField] PageController pageController;
 
         [SerializeField] Page page0;
-
         [SerializeField] Page page1;
 
         #if UNITY_EDITOR
@@ -41,7 +39,7 @@ namespace Ukiyo.Unity.Core.Page
             {
                 Debug.Log("Hiding All Pages");
                 var pageTypes = Enum.GetValues(typeof(PageType)).Cast<PageType>().ToArray();
-                foreach (PageType pageType in pageTypes)
+                foreach (var pageType in pageTypes)
                 {
                     pageController.HidePage(pageType);
                 }

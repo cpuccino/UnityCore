@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb32cd6f32395b247977dafc2eb6daeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPage: 0
+  initialPage: -1
   pages:
   - {fileID: 804085533}
   - {fileID: 994572483}
