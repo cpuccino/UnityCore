@@ -2,6 +2,6 @@
 {
     public enum PageType
     {
-        None = 0, Splash = 1, MainMenu = 2, Loading = 3, Restart = 4
+        None = -1, Splash = 0, MainMenu = 100, Loading = 200, Restart = 300
     }
 }
