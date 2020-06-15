@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ukiyo.Unity.Core.Utilities;
 
 namespace Ukiyo.Unity.Core.Page
 {
-    public class PageController : MonoBehaviour
+    public class PageController : Singleton<PageController>
     {
         static PageController instance;
 
@@ -15,28 +15,24 @@ namespace Ukiyo.Unity.Core.Page
 
         void Awake()
         {
-            InitializeInstance();
+            Initialize();
         }
-
-        void InitializeInstance()
+        
+        void Initialize()
         {
-            if(instance == null)
-            {
-                instance = this;
-                pageMap = new Dictionary<PageType, Page>();
-                RegisterPages();
+            pageMap = new Dictionary<PageType, Page>();
+            RegisterPages();
 
-                if(initialPage != PageType.None)
-                {
-                    ShowPage(initialPage);
-                }
+            if(initialPage != PageType.None)
+            {
+                ShowPage(initialPage);
             }
         }
         
         public void ShowPage(PageType pageToShowType)
         {
             if(pageToShowType == PageType.None) return;
-            var page = GetPage(pageToShowType, "show");
+            var page = GetPage(pageToShowType, "SHOW_PAGE");
             if(page == null) return;
             
             page.gameObject.SetActive(true);
@@ -47,7 +43,7 @@ namespace Ukiyo.Unity.Core.Page
         {
             if(pageToHideType == PageType.None) return;
 
-            var pageToHide = GetPage(pageToHideType, "hide");
+            var pageToHide = GetPage(pageToHideType, "HIDE_PAGE");
             if(pageToHide == null) return;
 
             if(pageToHide.gameObject.activeSelf)
@@ -57,7 +53,7 @@ namespace Ukiyo.Unity.Core.Page
 
             if(waitForExit && pageToHide.UseAnimation)
             {
-                var pageToShow = GetPage(pageToShowType, "show");
+                var pageToShow = GetPage(pageToShowType, "SHOW_PAGE");
                 StopCoroutine(WaitForPageExit(pageToHide, pageToShow));
                 StartCoroutine(WaitForPageExit(pageToHide, pageToShow));
             }
@@ -80,7 +76,7 @@ namespace Ukiyo.Unity.Core.Page
 
         void RegisterPages()
         {
-            foreach(Page page in pages)
+            foreach(var page in pages)
             {
                 page.gameObject.SetActive(false);
                 RegisterPage(page);
@@ -89,21 +85,21 @@ namespace Ukiyo.Unity.Core.Page
 
         void RegisterPage(Page page)
         {
-            if(!pageMap.ContainsKey(page.Type))
+            if(pageMap.ContainsKey(page.Type))
             {
-                pageMap.Add(page.Type, page);
-                Debug.Log($"Page [{page.Type.ToString()}] has been successfully registered");
+                Debug.LogWarning($"Page [{page.Type.ToString()}] has already been registered");
                 return;
             }
 
-            Debug.LogWarning($"Page [{page.Type.ToString()}] has already been registered");
+            pageMap.Add(page.Type, page);
+            Debug.Log($"Page [{page.Type.ToString()}] has been successfully registered");
         }
 
-        Page GetPage(PageType type, string operation = "access")
+        Page GetPage(PageType type, string operation = "ACCESS")
         {
             if(!pageMap.ContainsKey(type))
             {
-                Debug.LogWarning($"You are trying to {operation} a page [{type.ToString()}] that has not been registered");
+                Debug.LogWarning($"You are trying to perform [{operation}] operation on a page [{type.ToString()}] that has not been registered");
                 return null;
             }
 
