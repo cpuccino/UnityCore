@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 804085532}
   - component: {fileID: 804085531}
   m_Layer: 5
-  m_Name: Main Menu
+  m_Name: Start Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25770299412a09644859e24227d882c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 100
+  type: 1001
   useAnimation: 1
 --- !u!95 &804085532
 Animator:
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25770299412a09644859e24227d882c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 200
+  type: 2001
   useAnimation: 1
 --- !u!95 &994572485
 Animator:
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb32cd6f32395b247977dafc2eb6daeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPage: -1
+  initialPage: 0
   pages:
   - {fileID: 804085533}
   - {fileID: 994572483}

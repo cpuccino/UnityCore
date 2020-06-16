@@ -13,8 +13,8 @@ namespace UnityCore.Page
     public class Page: MonoBehaviour
     {
         Animator animator;
-        [SerializeField] PageType type;
-        [SerializeField] bool useAnimation;
+        [SerializeField] PageType type = default;
+        [SerializeField] bool useAnimation = default;
 
         public PageAnimationState AnimationState { get; private set; }
         public bool Active { get; private set; }

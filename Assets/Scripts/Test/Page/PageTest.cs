@@ -2,17 +2,17 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Ukiyo.Unity.Core.Page
+namespace UnityCore.Page
 {
     // Replace with automated tests
     public class PageTest : MonoBehaviour
     {
-        [SerializeField] PageController pageController;
+        [SerializeField] PageController pageController = default;
 
-        [SerializeField] PageType pageType0;
-        [SerializeField] PageType pageType1;
+        [SerializeField] PageType pageType0 = default;
+        [SerializeField] PageType pageType1 = default;
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         void Update()
         {
             HandlePageResetInput();
@@ -69,6 +69,6 @@ namespace Ukiyo.Unity.Core.Page
                 pageController.HidePage(pageType1);
             }
         }
-        #endif
+#endif
     }
 }

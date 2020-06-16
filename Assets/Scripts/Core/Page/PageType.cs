@@ -3,18 +3,18 @@
     public enum PageType
     {
         // Page null state
-        None = -1,
+        None = 0,
 
         // Splash screen and components
-        Splash = 0,
+        Splash = 1,
 
         // Main menu (opening) and components
-        StartMenu = 1000,
+        StartMenu = 1001,
         
         // Loading page and components
-        Loading = 2000,
+        Loading = 2001,
 
         // Restart page and components
-        Restart = 3000
+        Restart = 3001
     }
 }

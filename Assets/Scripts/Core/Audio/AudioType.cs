@@ -4,13 +4,13 @@
     // Grouping has gaps to allow for sub elements and subgrouping
     public enum AudioType
     {
-        None = -1,
+        None = 0,
         // Soundtracks
-        ST_Opening = 0, 
-        ST_StartMenu = 1,
+        ST_Opening = 1, 
+        ST_StartMenu = 2,
         
         // Sound FX
-        SFX_Player_Spawn = 1000,
-        SFX_Player_Defeat = 1050
+        SFX_Player_Spawn = 1001,
+        SFX_Player_Defeat = 1051
     }
 }
