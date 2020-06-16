@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace UnityCore.Scene
 {
-    public class SceneController : Singleton<SceneController>
+    public class SceneManager : Singleton<SceneManager>
     {
-        PageController pageController;
+        PageManager pageManager;
 
         PageType targetPageType;
         SceneType targetSceneType;
@@ -25,8 +25,8 @@ namespace UnityCore.Scene
 
         void Initialize()
         {  
-            pageController = PageController.Instance;
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            pageManager = PageManager.Instance;
+      UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         async void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
@@ -50,21 +50,21 @@ namespace UnityCore.Scene
 
             await Task.Delay(1000);
 
-            pageController.HidePage(targetPageType);
+            pageManager.HidePage(targetPageType);
             sceneIsLoading = false;
         }
 
         IEnumerator LoadScene()
         {
-            pageController.ShowPage(targetPageType);
+            pageManager.ShowPage(targetPageType);
             if(targetPageType != PageType.None)
             {
-                while(!pageController.IsPageActive(targetPageType))
+                while(!pageManager.IsPageActive(targetPageType))
                 {
                     yield return null;
                 }
             }
-            SceneManager.LoadScene(targetSceneType.ToString());
+      UnityEngine.SceneManagement.SceneManager.LoadScene(targetSceneType.ToString());
         }
 
         bool SceneCanBeLoaded(SceneType scene, bool reload)
@@ -79,9 +79,9 @@ namespace UnityCore.Scene
                 Debug.LogWarning($"Invalid scene name [{scene.ToString()}]");
                 return false;
             }
-            if(SceneManager.GetActiveScene().name == scene.ToString() && !reload)
+            if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene.ToString() && !reload)
             {
-                Debug.LogWarning($"You are trying to load a scene [{scene.ToString()}] that's currently active");
+        Debug.LogWarning($"You are trying to load a scene [{scene.ToString()}] that's currently active");
                 return false;
             }
 
@@ -95,12 +95,12 @@ namespace UnityCore.Scene
 
         void Dispose()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+      UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         public void Load(SceneType targetSceneType, Action<SceneType> onSceneLoadedCallback = null, bool reload = false, PageType loadingPageType = PageType.None)
         {
-            if(loadingPageType != PageType.None && pageController == null) return;
+            if(loadingPageType != PageType.None && pageManager == null) return;
             if(!SceneCanBeLoaded(targetSceneType, reload)) return;
 
             sceneIsLoading = true;

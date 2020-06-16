@@ -5,13 +5,13 @@ using UnityCore.Utilities;
 
 namespace UnityCore.Page
 {
-    public class PageController : Singleton<PageController>
+    public class PageManager : Singleton<PageManager>
     {
         Dictionary<PageType, Page> pageMap;
         [SerializeField] PageType initialPage = default;
         [NaughtyAttributes.ReorderableList][SerializeField] Page[] pages = default;
 
-        private PageController() {}
+        private PageManager() {}
         
         void Awake()
         {
