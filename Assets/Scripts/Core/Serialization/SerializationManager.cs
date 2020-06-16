@@ -8,24 +8,20 @@ namespace UnityCore.Utilities.Serialization
 {
     public class SerializationManager
     {
-        static readonly string saveDir = $"{Application.persistentDataPath}/saves";
-
-        public static bool Save(string saveName, object saveData)
+        public bool Save(string path, string filename, object data)
         {
             var formatter = GetBinaryFormatter();
 
-            if(!Directory.Exists(saveDir))
+            if(!Directory.Exists(path))
             {
-                Directory.CreateDirectory(saveDir);
+                Directory.CreateDirectory(path);
             }
 
-            string path = $"{saveDir}/{saveName}.sav";
-
-            using(var fs = File.Create(path))
+            using(var fs = File.Create(Path.Combine(path, filename)))
             {
                 try
                 {
-                    formatter.Serialize(fs, saveData);
+                    formatter.Serialize(fs, data);
                     return true;
                 }
                 catch
@@ -37,17 +33,16 @@ namespace UnityCore.Utilities.Serialization
             return true;
         }
 
-        public static object Load(string saveName)
+        public object Load(string filePath)
         {
             var formatter = GetBinaryFormatter();
-            string path = $"{saveDir}/{saveName}.sav";
 
-            if(!File.Exists(path))
+            if(!File.Exists(filePath))
             {
                 return null;
             }
 
-            using(var fs = File.Open(path, FileMode.Open))
+            using(var fs = File.Open(filePath, FileMode.Open))
             {
                 try
                 {
@@ -56,13 +51,13 @@ namespace UnityCore.Utilities.Serialization
                 }
                 catch
                 {
-                    Debug.LogError($"Failed to load file at path: {path}");
+                    Debug.LogError($"Failed to load file at path: {filePath}");
                     return null;
                 }
             }
         }
 
-        public static BinaryFormatter GetBinaryFormatter()
+        BinaryFormatter GetBinaryFormatter()
         {
             var formatter = new BinaryFormatter();
             
@@ -71,7 +66,7 @@ namespace UnityCore.Utilities.Serialization
             return formatter;
         }
 
-        static SurrogateSelector CreateSurrogates()
+        SurrogateSelector CreateSurrogates()
         {
             var selector = new SurrogateSelector();
 
