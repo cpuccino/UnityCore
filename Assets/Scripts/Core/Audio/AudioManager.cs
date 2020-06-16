@@ -58,7 +58,7 @@ namespace UnityCore.Audio
         {
             if (!_tracksMap.ContainsKey(type))
             {
-                Debug.LogWarning($"You are trying to perform [{operation}] operation on an audio track [{type.ToString()}] that has not been registered");
+                Debug.LogError($"You are trying to perform [{operation}] operation on an audio track [{type.ToString()}] that has not been registered");
                 return null;
             }
 
@@ -69,7 +69,7 @@ namespace UnityCore.Audio
         {
             if (!_taskQueueMap.ContainsKey(type))
             {
-                Debug.LogWarning($"You are trying to perform [{operation}] operation on an queued task [{type.ToString()}] that doesn't exist");
+                Debug.LogError($"You are trying to perform [{operation}] operation on an queued task [{type.ToString()}] that doesn't exist");
                 return null;
             }
 
