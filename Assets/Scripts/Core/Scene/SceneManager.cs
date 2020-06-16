@@ -10,6 +10,8 @@ namespace UnityCore.Scene
 {
     public class SceneManager : Singleton<SceneManager>
     {
+        [SerializeField] float _sceneLoadDelay;
+
         PersistentUIManager _persistentUIManager;
 
         PageType _targetPageType;
@@ -48,7 +50,7 @@ namespace UnityCore.Scene
                 }
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(Mathf.FloorToInt(_sceneLoadDelay * 1000));
 
             _persistentUIManager.HidePage(_targetPageType);
             _sceneIsLoading = false;
