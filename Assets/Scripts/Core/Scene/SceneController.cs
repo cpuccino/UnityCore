@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityCore.Page;
 using UnityCore.Utilities;
-using UnityCore.Audio;
 using System.Threading.Tasks;
 
 namespace UnityCore.Scene
@@ -12,7 +11,6 @@ namespace UnityCore.Scene
     public class SceneController : Singleton<SceneController>
     {
         PageController pageController;
-        AudioController audioController;
 
         PageType targetPageType;
         SceneType targetSceneType;
@@ -23,13 +21,11 @@ namespace UnityCore.Scene
         void Awake()
         {
             Initialize();
-            DontDestroyOnLoad(gameObject);
         }
 
         void Initialize()
         {  
             pageController = PageController.Instance;
-            audioController = AudioController.Instance;
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -68,7 +64,6 @@ namespace UnityCore.Scene
                     yield return null;
                 }
             }
-            Debug.Log("Attemping to load scene "+targetSceneType.ToString());
             SceneManager.LoadScene(targetSceneType.ToString());
         }
 
@@ -79,7 +74,7 @@ namespace UnityCore.Scene
                 Debug.LogWarning($"Unable to load scene [{scene.ToString()}]. Another scene [{targetSceneType.ToString()}] is in progress.");
                 return false;
             }
-            if(!SceneManager.GetSceneByName(scene.ToString()).IsValid())
+            if(!Application.CanStreamedLevelBeLoaded(scene.ToString()))
             {
                 Debug.LogWarning($"Invalid scene name [{scene.ToString()}]");
                 return false;
