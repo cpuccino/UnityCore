@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SceneType : MonoBehaviour
+﻿namespace UnityCore.Scene
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum SceneType 
     {
-        
-    }
+        // Scene null state
+        None = 0,
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Menu scene
+        Menu = 1,
+
+        // Game Scenes
+        Game = 1001
     }
 }
