@@ -1,6 +1,6 @@
 ﻿using UnityCore.Utilities;
 
-public class CoreSystem: SingletonBehaviour<CoreSystem>
+public class CoreSystem : SingletonBehaviour<CoreSystem>
 {
     public static UnityCore.PersistentUI.PersistentUIManager PersistentUIManager { get; private set; }
 
@@ -10,11 +10,11 @@ public class CoreSystem: SingletonBehaviour<CoreSystem>
 
     private static bool _persistenceInitialized = false;
 
-    void Awake()
+    private void Awake()
     {
         Initialize();
-        
-        if(!_persistenceInitialized)
+
+        if (!_persistenceInitialized)
         {
             DontDestroyOnLoad(gameObject);
             _persistenceInitialized = true;
@@ -25,7 +25,7 @@ public class CoreSystem: SingletonBehaviour<CoreSystem>
         }
     }
 
-    void Initialize()
+    private void Initialize()
     {
         PersistentUIManager = UnityCore.PersistentUI.PersistentUIManager.Instance;
         AudioManager = UnityCore.Audio.AudioManager.Instance;

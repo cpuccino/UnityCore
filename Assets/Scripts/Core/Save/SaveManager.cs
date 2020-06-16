@@ -1,14 +1,14 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityCore.Utilities.Serialization;
+using UnityEngine;
 
 public class SaveManager
 {
     public static readonly string SaveBasePath = Path.Combine(Application.persistentDataPath, "saves");
     public static readonly string SaveFileExtension = ".sav";
-    
+
     public List<string> SaveFiles { get { return GetSaveFiles(); } }
 
     private SerializationManager _serializationManager;
@@ -17,10 +17,10 @@ public class SaveManager
     {
         _serializationManager = new SerializationManager();
     }
-    
+
     private List<string> GetSaveFiles()
     {
-        if(!Directory.Exists(SaveBasePath))
+        if (!Directory.Exists(SaveBasePath))
         {
             Directory.CreateDirectory(SaveBasePath);
         }
@@ -38,7 +38,7 @@ public class SaveManager
 
     public SaveData Load(string name)
     {
-        if(!SaveFiles.Contains(name)) return null;
+        if (!SaveFiles.Contains(name)) return null;
 
         var saveData = (SaveData)_serializationManager.Load(Path.Combine(SaveBasePath, name));
         return saveData;

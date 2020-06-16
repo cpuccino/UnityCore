@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityCore.Utilities.Serialization.Surrogates
 {
-    public class QuaternionSerializationSurrogate: ISerializationSurrogate
+    public class QuaternionSerializationSurrogate : ISerializationSurrogate
     {
         public void GetObjectData(object obj, SerializationInfo info, StreamingContext context)
         {

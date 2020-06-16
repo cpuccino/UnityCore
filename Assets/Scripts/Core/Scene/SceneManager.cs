@@ -1,50 +1,50 @@
 ﻿using System;
 using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 using UnityCore.PersistentUI;
 using UnityCore.Utilities;
-using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UnityCore.Scene
 {
     public class SceneManager : SingletonBehaviour<SceneManager>
     {
-        [SerializeField] float _sceneLoadDelay = default;
+        [SerializeField] private float _sceneLoadDelay = default;
 
-        PersistentUIManager _persistentUIManager;
+        private PersistentUIManager _persistentUIManager;
 
-        PersistentUIType _targetPersistentUIType;
-        SceneType _targetSceneType;
-        bool _sceneIsLoading;
+        private PersistentUIType _targetPersistentUIType;
+        private SceneType _targetSceneType;
+        private bool _sceneIsLoading;
 
-        Action<SceneType> _onSceneLoadedCallback;
+        private Action<SceneType> _onSceneLoadedCallback;
 
-        void Awake()
+        private void Awake()
         {
             Initialize();
         }
 
-        void Initialize()
-        {  
+        private void Initialize()
+        {
             _persistentUIManager = PersistentUIManager.Instance;
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        async void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+        private async void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
         {
-            if(_targetSceneType == SceneType.None) return;
+            if (_targetSceneType == SceneType.None) return;
 
             var sceneType = (SceneType)Enum.Parse(typeof(SceneType), scene.name);
-            if(_targetSceneType != sceneType) return;
+            if (_targetSceneType != sceneType) return;
 
-            if(_onSceneLoadedCallback != null)
+            if (_onSceneLoadedCallback != null)
             {
-                try 
+                try
                 {
                     _onSceneLoadedCallback(sceneType);
-                } 
-                catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Debug.LogWarning($"Unable to run the callback after [{sceneType.ToString()}] was loaded. {System.Environment.NewLine}{e.Message}");
                 }
@@ -56,12 +56,12 @@ namespace UnityCore.Scene
             _sceneIsLoading = false;
         }
 
-        IEnumerator LoadScene()
+        private IEnumerator LoadScene()
         {
             _persistentUIManager.ShowPersistentUI(_targetPersistentUIType);
-            if(_targetPersistentUIType != PersistentUIType.None)
+            if (_targetPersistentUIType != PersistentUIType.None)
             {
-                while(!_persistentUIManager.IsPersistentUIActive(_targetPersistentUIType))
+                while (!_persistentUIManager.IsPersistentUIActive(_targetPersistentUIType))
                 {
                     yield return null;
                 }
@@ -69,19 +69,19 @@ namespace UnityCore.Scene
             UnityEngine.SceneManagement.SceneManager.LoadScene(_targetSceneType.ToString());
         }
 
-        bool SceneCanBeLoaded(SceneType scene, bool reload)
+        private bool SceneCanBeLoaded(SceneType scene, bool reload)
         {
-            if(_sceneIsLoading)
+            if (_sceneIsLoading)
             {
                 Debug.LogWarning($"Unable to load scene [{scene.ToString()}]. Another scene [{_targetSceneType.ToString()}] is in progress.");
                 return false;
             }
-            if(!Application.CanStreamedLevelBeLoaded(scene.ToString()))
+            if (!Application.CanStreamedLevelBeLoaded(scene.ToString()))
             {
                 Debug.LogWarning($"Invalid scene name [{scene.ToString()}]");
                 return false;
             }
-            if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene.ToString() && !reload)
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene.ToString() && !reload)
             {
                 Debug.LogWarning($"You are trying to load a scene [{scene.ToString()}] that's currently active");
                 return false;
@@ -90,20 +90,20 @@ namespace UnityCore.Scene
             return true;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             Dispose();
         }
 
-        void Dispose()
+        private void Dispose()
         {
             UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         public void Load(SceneType targetSceneType, Action<SceneType> onSceneLoadedCallback = null, bool reload = false, PersistentUIType loadingPersistentUIType = PersistentUIType.None)
         {
-            if(loadingPersistentUIType != PersistentUIType.None && _persistentUIManager == null) return;
-            if(!SceneCanBeLoaded(targetSceneType, reload)) return;
+            if (loadingPersistentUIType != PersistentUIType.None && _persistentUIManager == null) return;
+            if (!SceneCanBeLoaded(targetSceneType, reload)) return;
 
             _sceneIsLoading = true;
             _targetSceneType = targetSceneType;

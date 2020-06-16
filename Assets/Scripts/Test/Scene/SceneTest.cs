@@ -1,38 +1,40 @@
-﻿using UnityEngine;
-using UnityCore.PersistentUI;
+﻿using UnityCore.PersistentUI;
+using UnityEngine;
 
 namespace UnityCore.Scene
 {
     // Replace with automated tests
     public class SceneTest : MonoBehaviour
     {
-        [SerializeField] SceneManager _sceneManager = default;
+        [SerializeField] private SceneManager _sceneManager = default;
 
-        [SerializeField] SceneType _sceneType0 = default;
-        [SerializeField] SceneType _sceneType1 = default;
+        [SerializeField] private SceneType _sceneType0 = default;
+        [SerializeField] private SceneType _sceneType1 = default;
 
 #if UNITY_EDITOR
-        void Update()
+
+        private void Update()
         {
             HandleScene0Input();
             HandleScene1Input();
         }
 
-        void HandleScene0Input()
+        private void HandleScene0Input()
         {
-            if(Input.GetKeyUp(KeyCode.Z))
+            if (Input.GetKeyUp(KeyCode.Z))
             {
                 _sceneManager.Load(_sceneType0, null, false, PersistentUIType.Loading);
             }
         }
 
-        void HandleScene1Input()
+        private void HandleScene1Input()
         {
-            if(Input.GetKeyUp(KeyCode.X))
+            if (Input.GetKeyUp(KeyCode.X))
             {
                 _sceneManager.Load(_sceneType1, null, false, PersistentUIType.Loading);
             }
         }
+
 #endif
     }
 }

@@ -4,7 +4,7 @@
     {
         Start, Stop, Restart
     }
-    
+
     public struct AudioTaskOptions
     {
         public float Duration { get; set; }
@@ -24,5 +24,5 @@
 
             Options = options ?? new AudioTaskOptions();
         }
-    } 
+    }
 }
