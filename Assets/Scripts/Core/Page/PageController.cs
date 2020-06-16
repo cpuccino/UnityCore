@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Ukiyo.Unity.Core.Utilities;
+using NaughtyAttributes;
 
 namespace Ukiyo.Unity.Core.Page
 {
@@ -11,7 +12,7 @@ namespace Ukiyo.Unity.Core.Page
 
         Dictionary<PageType, Page> pageMap;
         [SerializeField] PageType initialPage;
-        [SerializeField] Page[] pages;
+        [NaughtyAttributes.ReorderableList][SerializeField] Page[] pages;
 
         void Awake()
         {

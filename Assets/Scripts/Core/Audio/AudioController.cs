@@ -9,7 +9,7 @@ namespace Ukiyo.Unity.Core.Audio
 {
     public class AudioController : Singleton<AudioController>
     {
-        [SerializeField] AudioTrack[] tracks;
+        [NaughtyAttributes.ReorderableList][SerializeField] AudioTrack[] tracks;
         Dictionary<AudioType, AudioTrack> tracksMap;
         Dictionary<AudioType, IEnumerator> taskQueueMap;
 
@@ -176,7 +176,7 @@ namespace Ukiyo.Unity.Core.Audio
                 float target = start ? 1 : 0;
                 float timer = 0;
 
-                while(timer < duration)
+                while(timer <= duration)
                 {
                     audioTrack.Source.volume = Mathf.Lerp(initial, target, timer / duration);
                     timer += Time.deltaTime;

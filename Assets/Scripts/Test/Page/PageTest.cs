@@ -9,15 +9,10 @@ namespace Ukiyo.Unity.Core.Page
     {
         [SerializeField] PageController pageController;
 
-        [SerializeField] Page page0;
-        [SerializeField] Page page1;
+        [SerializeField] PageType pageType0;
+        [SerializeField] PageType pageType1;
 
         #if UNITY_EDITOR
-        void Awake()
-        {
-            Debug.Log("Page Test Attached");
-        }
-
         void Update()
         {
             HandlePageResetInput();
@@ -40,38 +35,38 @@ namespace Ukiyo.Unity.Core.Page
 
         void HandlePage0Input()
         {
-            if(page0 == null || page0.Type == PageType.None) return;
+            if(pageType0 == PageType.None) return;
 
             if(Input.GetKeyUp(KeyCode.Q))
             {
-                Debug.Log($"Showing {page0.Type.ToString()}");
-                pageController.ShowPage(page0.Type);
+                Debug.Log($"Showing {pageType0.ToString()}");
+                pageController.ShowPage(pageType0);
             }
             if(Input.GetKeyUp(KeyCode.W))
             {
-                Debug.Log($"Hiding {page0.Type.ToString()}");
-                pageController.HidePage(page0.Type);
+                Debug.Log($"Hiding {pageType0.ToString()}");
+                pageController.HidePage(pageType0);
             }
         }
 
         void HandlePage1Input()
         {
-            if(page1 == null || page1.Type == PageType.None) return;
+            if(pageType1 == PageType.None) return;
 
             if(Input.GetKeyUp(KeyCode.E))
             {
-                Debug.Log($"Hiding {page0.Type.ToString()}, then Showing {page1.Type.ToString()}");
-                pageController.HidePage(page0.Type, page1.Type);
+                Debug.Log($"Hiding {pageType0.ToString()}, then Showing {pageType1.ToString()}");
+                pageController.HidePage(pageType0, pageType1);
             }
             if(Input.GetKeyUp(KeyCode.R))
             {
-                Debug.Log($"Hiding {page0.Type.ToString()}, Wait, then Showing {page1.Type.ToString()}");
-                pageController.HidePage(page0.Type, page1.Type, true);
+                Debug.Log($"Hiding {pageType0.ToString()}, Wait, then Showing {pageType1.ToString()}");
+                pageController.HidePage(pageType0, pageType1, true);
             }
             if(Input.GetKeyUp(KeyCode.T))
             {
-                Debug.Log($"Hiding {page1.Type.ToString()}");
-                pageController.HidePage(page1.Type);
+                Debug.Log($"Hiding {pageType1.ToString()}");
+                pageController.HidePage(pageType1);
             }
         }
         #endif
