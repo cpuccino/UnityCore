@@ -1,15 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ukiyo.Unity.Core.Audio
 {
-    [Serializable]
-    public class AudioTrack
+    public class AudioTrack: MonoBehaviour
     {
-        [SerializeField] AudioSource source;
-        [SerializeField] AudioObject[] audios;
+        [NaughtyAttributes.ReorderableList][SerializeField] AudioObject[] audios;
 
-        public AudioSource Source => source;
+        public AudioSource Source { get; private set; }
         public AudioObject[] Audios => audios;
+
+        void Awake()
+        {
+            Source = GetComponent<AudioSource>();
+        }
     }
 }

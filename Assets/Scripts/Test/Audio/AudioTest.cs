@@ -13,11 +13,6 @@ namespace Ukiyo.Unity.Core.Audio
         [SerializeField] float fadeDuration;
 
         #if UNITY_EDITOR
-        void Awake()
-        {
-            Debug.Log("Audio Test Attached");
-        }
-
         void Update()
         {
             HandleAudio0Input();
