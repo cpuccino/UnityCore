@@ -2,7 +2,7 @@
 
 public class CoreSystem: SingletonBehaviour<CoreSystem>
 {
-    public static UnityCore.Page.PersistentUIManager PersistentUIManager { get; private set; }
+    public static UnityCore.PersistentUI.PersistentUIManager PersistentUIManager { get; private set; }
 
     public static UnityCore.Audio.AudioManager AudioManager { get; private set; }
 
@@ -27,7 +27,7 @@ public class CoreSystem: SingletonBehaviour<CoreSystem>
 
     void Initialize()
     {
-        PersistentUIManager = UnityCore.Page.PersistentUIManager.Instance;
+        PersistentUIManager = UnityCore.PersistentUI.PersistentUIManager.Instance;
         AudioManager = UnityCore.Audio.AudioManager.Instance;
         SceneManager = UnityCore.Scene.SceneManager.Instance;
     }
