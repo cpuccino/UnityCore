@@ -24,6 +24,7 @@ namespace UnityCore.Audio
         {
             tracksMap = new Dictionary<AudioType, AudioTrack>();
             taskQueueMap = new Dictionary<AudioType, IEnumerator>();
+            if(tracks == null) tracks = new AudioTrack[0];
 
             RegisterTracks();
         }

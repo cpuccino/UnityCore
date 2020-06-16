@@ -16,11 +16,14 @@ namespace UnityCore.Page
         void Awake()
         {
             Initialize();
+            DontDestroyOnLoad(gameObject);
         }
         
         void Initialize()
         {
             pageMap = new Dictionary<PageType, Page>();
+            if(pages == null) pages = new Page[0];
+            
             RegisterPages();
 
             if(initialPage != PageType.None)

@@ -21,7 +21,7 @@ namespace UnityCore.Utilities
                 lock(singletonLock)
                 {
                     var singleton = GetOrCreateSingleton();
-                    singleton.name = $"{typeof(T).Name} (singleton)";
+                    singleton.name = $"{typeof(T).Name} (Singleton)";
                     return singleton;
                 }
             }
@@ -34,11 +34,8 @@ namespace UnityCore.Utilities
             instance = (T)FindObjectOfType(typeof(T));
             if(instance != null) return instance;
 
-            Debug.Log($"initializing singleton {typeof(T).Name}");
-
             var gameobject = new GameObject();
             instance = gameobject.AddComponent<T>();
-            DontDestroyOnLoad(gameobject);
 
             return instance;
         }
