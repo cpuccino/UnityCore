@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UnityCore.Scene
 {
-    public class SceneManager : Singleton<SceneManager>
+    public class SceneManager : SingletonBehaviour<SceneManager>
     {
         [SerializeField] float _sceneLoadDelay;
 

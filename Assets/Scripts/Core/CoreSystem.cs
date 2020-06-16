@@ -1,6 +1,6 @@
 ﻿using UnityCore.Utilities;
 
-public class CoreSystem: Singleton<CoreSystem>
+public class CoreSystem: SingletonBehaviour<CoreSystem>
 {
     public static UnityCore.Page.PersistentUIManager PersistentUIManager { get; private set; }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UnityCore.Utilities
 {
-    public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static object _singletonLock = new object();
         private static bool _destroyed = false;
