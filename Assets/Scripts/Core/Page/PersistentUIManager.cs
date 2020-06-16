@@ -5,7 +5,7 @@ using UnityCore.Utilities;
 
 namespace UnityCore.Page
 {
-    public class PersistentUIManager : Singleton<PersistentUIManager>
+    public class PersistentUIManager : SingletonBehaviour<PersistentUIManager>
     {
         Dictionary<PageType, Page> _pageMap;
         [SerializeField] PageType _initialPage = default;

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace UnityCore.Audio
 {
-    public class AudioManager : Singleton<AudioManager>
+    public class AudioManager : SingletonBehaviour<AudioManager>
     {
         [NaughtyAttributes.ReorderableList][SerializeField] AudioTrack[] _tracks = default;
         Dictionary<AudioType, AudioTrack> _tracksMap;
