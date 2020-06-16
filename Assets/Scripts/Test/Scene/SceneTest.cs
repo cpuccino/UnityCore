@@ -22,7 +22,7 @@ namespace UnityCore.Scene
         {
             if(Input.GetKeyUp(KeyCode.Z))
             {
-                _sceneManager.Load(SceneType.Menu);
+                _sceneManager.Load(SceneType.Menu, null, false, PageType.Loading);
             }
         }
 
@@ -30,11 +30,7 @@ namespace UnityCore.Scene
         {
             if(Input.GetKeyUp(KeyCode.X))
             {
-                _sceneManager.Load(SceneType.Level, scene => 
-                {
-                    Debug.Log($"Scene [{scene}] finished loading");
-                }, 
-                false, PageType.Loading);
+                _sceneManager.Load(SceneType.Level, null, false, PageType.Loading);
             }
         }
 #endif

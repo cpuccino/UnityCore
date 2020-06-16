@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8100224182212191360}
   - component: {fileID: 408261770}
   m_Layer: 0
-  m_Name: System
+  m_Name: CoreSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 437541532, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
       propertyPath: _audios.Array.data[0]._clip
       value: 
-      objectReference: {fileID: 8300000, guid: d2bee5581813dc84a9966816c6ad3887, type: 3}
+      objectReference: {fileID: 8300000, guid: b995a331bc28d49439166e381fb50c74, type: 3}
     - target: {fileID: 437541532, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
       propertyPath: _audios.Array.data[1]._type
       value: 2
@@ -85,7 +85,7 @@ PrefabInstance:
     - target: {fileID: 520925636, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
       propertyPath: _audios.Array.data[0]._clip
       value: 
-      objectReference: {fileID: 8300000, guid: 10f3eea9277cace4b909180d5d289cc6, type: 3}
+      objectReference: {fileID: 8300000, guid: 84b0fe6decec9de4faed3c4a5c7f269d, type: 3}
     - target: {fileID: 520925636, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
       propertyPath: _audios.Array.data[1]._type
       value: 1051
@@ -232,6 +232,10 @@ PrefabInstance:
       propertyPath: _type
       value: 1001
       objectReference: {fileID: 0}
+    - target: {fileID: 804085533, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
+      propertyPath: _useAnimation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 994572482, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
       propertyPath: m_Name
       value: LoadingPage
@@ -244,11 +248,30 @@ PrefabInstance:
       propertyPath: _type
       value: 2001
       objectReference: {fileID: 0}
+    - target: {fileID: 994572483, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
+      propertyPath: _useAnimation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4689247319177661214, guid: 70f4231800a14a84f9d96b8f819473a9,
         type: 3}
       propertyPath: m_Name
       value: PersistentUIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5881089582426810324, guid: 70f4231800a14a84f9d96b8f819473a9,
+        type: 3}
+      propertyPath: _pages.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881089582426810324, guid: 70f4231800a14a84f9d96b8f819473a9,
+        type: 3}
+      propertyPath: _pages.Array.data[0]
+      value: 
+      objectReference: {fileID: 3751177137030665994}
+    - target: {fileID: 5881089582426810324, guid: 70f4231800a14a84f9d96b8f819473a9,
+        type: 3}
+      propertyPath: _pages.Array.data[1]
+      value: 
+      objectReference: {fileID: 3751177137242845396}
     - target: {fileID: 6564238494369585151, guid: 70f4231800a14a84f9d96b8f819473a9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -379,6 +402,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb32cd6f32395b247977dafc2eb6daeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3751177137030665994 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 994572483, guid: 70f4231800a14a84f9d96b8f819473a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3751177137948749769}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25770299412a09644859e24227d882c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3751177137242845396 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 804085533, guid: 70f4231800a14a84f9d96b8f819473a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3751177137948749769}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25770299412a09644859e24227d882c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5080836043101903023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -386,6 +433,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8100224182212191360}
     m_Modifications:
+    - target: {fileID: 5499948202916659612, guid: ffdfd0c9fe83a1f46a51a089652e7f75,
+        type: 3}
+      propertyPath: _sceneLoadDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5499948202916659613, guid: ffdfd0c9fe83a1f46a51a089652e7f75,
         type: 3}
       propertyPath: m_LocalPosition.x
