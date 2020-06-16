@@ -12,13 +12,13 @@ namespace UnityCore.Utilities
         {
             get
             {
-                if(_destroyed)
+                if (_destroyed)
                 {
                     Debug.LogWarning($"[Singleton] Instance {typeof(T)} already destroyed. Returning null");
                     return null;
                 }
 
-                lock(_singletonLock)
+                lock (_singletonLock)
                 {
                     var singleton = GetOrCreateSingleton();
                     singleton.name = $"{typeof(T).Name} (Singleton)";
@@ -27,12 +27,12 @@ namespace UnityCore.Utilities
             }
         }
 
-        static T GetOrCreateSingleton()
+        private static T GetOrCreateSingleton()
         {
-            if(_instance != null) return _instance;
+            if (_instance != null) return _instance;
 
             _instance = (T)FindObjectOfType(typeof(T));
-            if(_instance != null) return _instance;
+            if (_instance != null) return _instance;
 
             var gameobject = new GameObject();
             _instance = gameobject.AddComponent<T>();
@@ -40,12 +40,12 @@ namespace UnityCore.Utilities
             return _instance;
         }
 
-        void OnApplicationQuit() 
+        private void OnApplicationQuit()
         {
             _destroyed = true;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             _destroyed = true;
         }

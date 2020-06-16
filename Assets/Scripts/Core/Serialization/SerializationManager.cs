@@ -12,12 +12,12 @@ namespace UnityCore.Utilities.Serialization
         {
             var formatter = GetBinaryFormatter();
 
-            if(!Directory.Exists(path))
+            if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
-            using(var fs = File.Create(Path.Combine(path, filename)))
+            using (var fs = File.Create(Path.Combine(path, filename)))
             {
                 try
                 {
@@ -37,12 +37,12 @@ namespace UnityCore.Utilities.Serialization
         {
             var formatter = GetBinaryFormatter();
 
-            if(!File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 return null;
             }
 
-            using(var fs = File.Open(filePath, FileMode.Open))
+            using (var fs = File.Open(filePath, FileMode.Open))
             {
                 try
                 {
@@ -57,16 +57,16 @@ namespace UnityCore.Utilities.Serialization
             }
         }
 
-        BinaryFormatter GetBinaryFormatter()
+        private BinaryFormatter GetBinaryFormatter()
         {
             var formatter = new BinaryFormatter();
-            
+
             formatter.SurrogateSelector = CreateSurrogates();
 
             return formatter;
         }
 
-        SurrogateSelector CreateSurrogates()
+        private SurrogateSelector CreateSurrogates()
         {
             var selector = new SurrogateSelector();
 

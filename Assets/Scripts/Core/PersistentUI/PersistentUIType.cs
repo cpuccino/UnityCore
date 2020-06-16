@@ -10,7 +10,7 @@
 
         // Main menu (opening) and components
         StartMenu = 1001,
-        
+
         // Loading persistent UI and components
         Loading = 2001,
 

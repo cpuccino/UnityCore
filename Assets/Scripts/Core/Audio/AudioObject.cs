@@ -6,8 +6,8 @@ namespace UnityCore.Audio
     [Serializable]
     public class AudioObject
     {
-        [SerializeField] AudioType _type = default;
-        [SerializeField] AudioClip _clip = default;
+        [SerializeField] private AudioType _type = default;
+        [SerializeField] private AudioClip _clip = default;
 
         public AudioType Type => _type;
         public AudioClip Clip => _clip;

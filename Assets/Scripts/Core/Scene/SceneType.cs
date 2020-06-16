@@ -1,7 +1,7 @@
 ﻿namespace UnityCore.Scene
 {
     // Scene types should match scene names in build settings
-    public enum SceneType 
+    public enum SceneType
     {
         // Scene null state
         None = 0,

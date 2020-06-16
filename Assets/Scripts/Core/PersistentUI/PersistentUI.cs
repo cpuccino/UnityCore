@@ -9,30 +9,30 @@ namespace UnityCore.PersistentUI
     {
         None, On, Off
     }
-    
-    public class PersistentUI: MonoBehaviour
+
+    public class PersistentUI : MonoBehaviour
     {
-        Animator _animator;
-        [SerializeField] PersistentUIType _type = default;
-        [SerializeField] bool _useAnimation = default;
+        private Animator _animator;
+        [SerializeField] private PersistentUIType _type = default;
+        [SerializeField] private bool _useAnimation = default;
 
         public PersistentUIAnimationState AnimationState { get; private set; }
         public bool Active { get; private set; }
         public PersistentUIType Type { get => _type; set => _type = value; }
         public bool UseAnimation => _useAnimation;
 
-        void OnEnable()
+        private void OnEnable()
         {
             _animator = GetComponent<Animator>();
-            if(!_animator) return;
+            if (!_animator) return;
 
             _animator.SetBool("on", false);
             _animator.enabled = UseAnimation;
         }
-        
+
         public void Animate(bool transitionOn)
         {
-            if(UseAnimation && _animator != null)
+            if (UseAnimation && _animator != null)
             {
                 _animator.SetBool("on", transitionOn);
                 StopCoroutine(AwaitAnimation(transitionOn));
@@ -42,16 +42,16 @@ namespace UnityCore.PersistentUI
             SetActive(transitionOn);
         }
 
-        IEnumerator AwaitAnimation(bool transitionOn)
+        private IEnumerator AwaitAnimation(bool transitionOn)
         {
             AnimationState = transitionOn ? PersistentUIAnimationState.On : PersistentUIAnimationState.Off;
 
-            while(!_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationState.ToString()))
+            while (!_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationState.ToString()))
             {
                 yield return null;
             }
 
-            while(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || _animator.IsInTransition(0))
+            while (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || _animator.IsInTransition(0))
             {
                 yield return null;
             }
@@ -63,11 +63,10 @@ namespace UnityCore.PersistentUI
         private void SetActive(bool transitionOn)
         {
             Active = transitionOn;
-            if(!transitionOn)
+            if (!transitionOn)
             {
                 gameObject.SetActive(false);
             }
         }
-
     }
 }
