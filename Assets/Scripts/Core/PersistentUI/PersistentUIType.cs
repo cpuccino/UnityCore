@@ -1,8 +1,8 @@
-﻿namespace UnityCore.Page
+﻿namespace UnityCore.PersistentUI
 {
-    public enum PageType
+    public enum PersistentUIType
     {
-        // Page null state
+        // Persistent UI null state
         None = 0,
 
         // Splash screen and components
@@ -11,10 +11,10 @@
         // Main menu (opening) and components
         StartMenu = 1001,
         
-        // Loading page and components
+        // Loading persistent UI and components
         Loading = 2001,
 
-        // Restart page and components
+        // Restart persistent UI and components
         Restart = 3001
     }
 }

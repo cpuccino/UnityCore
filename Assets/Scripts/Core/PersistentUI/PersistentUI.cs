@@ -1,24 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace UnityCore.Page
+namespace UnityCore.PersistentUI
 {
-    // Whether the page is transitioning on, off or neutral
+    // Whether the persistent ui is transitioning on, off or neutral
     // Must match the animation state
-    public enum PageAnimationState
+    public enum PersistentUIAnimationState
     {
         None, On, Off
     }
     
-    public class Page: MonoBehaviour
+    public class PersistentUI: MonoBehaviour
     {
         Animator _animator;
-        [SerializeField] PageType _type = default;
+        [SerializeField] PersistentUIType _type = default;
         [SerializeField] bool _useAnimation = default;
 
-        public PageAnimationState AnimationState { get; private set; }
+        public PersistentUIAnimationState AnimationState { get; private set; }
         public bool Active { get; private set; }
-        public PageType Type { get => _type; set => _type = value; }
+        public PersistentUIType Type { get => _type; set => _type = value; }
         public bool UseAnimation => _useAnimation;
 
         void OnEnable()
@@ -44,7 +44,7 @@ namespace UnityCore.Page
 
         IEnumerator AwaitAnimation(bool transitionOn)
         {
-            AnimationState = transitionOn ? PageAnimationState.On : PageAnimationState.Off;
+            AnimationState = transitionOn ? PersistentUIAnimationState.On : PersistentUIAnimationState.Off;
 
             while(!_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationState.ToString()))
             {
@@ -56,7 +56,7 @@ namespace UnityCore.Page
                 yield return null;
             }
 
-            AnimationState = PageAnimationState.None;
+            AnimationState = PersistentUIAnimationState.None;
             SetActive(transitionOn);
         }
 

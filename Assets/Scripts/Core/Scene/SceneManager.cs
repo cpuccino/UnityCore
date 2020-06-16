@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityCore.Page;
+using UnityCore.PersistentUI;
 using UnityCore.Utilities;
 using System.Threading.Tasks;
 
@@ -10,11 +10,11 @@ namespace UnityCore.Scene
 {
     public class SceneManager : SingletonBehaviour<SceneManager>
     {
-        [SerializeField] float _sceneLoadDelay;
+        [SerializeField] float _sceneLoadDelay = default;
 
         PersistentUIManager _persistentUIManager;
 
-        PageType _targetPageType;
+        PersistentUIType _targetPersistentUIType;
         SceneType _targetSceneType;
         bool _sceneIsLoading;
 
@@ -52,16 +52,16 @@ namespace UnityCore.Scene
 
             await Task.Delay(Mathf.FloorToInt(_sceneLoadDelay * 1000));
 
-            _persistentUIManager.HidePage(_targetPageType);
+            _persistentUIManager.HidePersistentUI(_targetPersistentUIType);
             _sceneIsLoading = false;
         }
 
         IEnumerator LoadScene()
         {
-            _persistentUIManager.ShowPage(_targetPageType);
-            if(_targetPageType != PageType.None)
+            _persistentUIManager.ShowPersistentUI(_targetPersistentUIType);
+            if(_targetPersistentUIType != PersistentUIType.None)
             {
-                while(!_persistentUIManager.IsPageActive(_targetPageType))
+                while(!_persistentUIManager.IsPersistentUIActive(_targetPersistentUIType))
                 {
                     yield return null;
                 }
@@ -100,14 +100,14 @@ namespace UnityCore.Scene
             UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-        public void Load(SceneType targetSceneType, Action<SceneType> onSceneLoadedCallback = null, bool reload = false, PageType loadingPageType = PageType.None)
+        public void Load(SceneType targetSceneType, Action<SceneType> onSceneLoadedCallback = null, bool reload = false, PersistentUIType loadingPersistentUIType = PersistentUIType.None)
         {
-            if(loadingPageType != PageType.None && _persistentUIManager == null) return;
+            if(loadingPersistentUIType != PersistentUIType.None && _persistentUIManager == null) return;
             if(!SceneCanBeLoaded(targetSceneType, reload)) return;
 
             _sceneIsLoading = true;
             _targetSceneType = targetSceneType;
-            _targetPageType = loadingPageType;
+            _targetPersistentUIType = loadingPersistentUIType;
             _onSceneLoadedCallback = onSceneLoadedCallback;
 
             StartCoroutine(LoadScene());
