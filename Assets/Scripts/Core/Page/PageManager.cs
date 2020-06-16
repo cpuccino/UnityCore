@@ -5,13 +5,13 @@ using UnityCore.Utilities;
 
 namespace UnityCore.Page
 {
-    public class PageManager : Singleton<PageManager>
+    public class PersistentUIManager : Singleton<PersistentUIManager>
     {
-        Dictionary<PageType, Page> pageMap;
-        [SerializeField] PageType initialPage = default;
-        [NaughtyAttributes.ReorderableList][SerializeField] Page[] pages = default;
+        Dictionary<PageType, Page> _pageMap;
+        [SerializeField] PageType _initialPage = default;
+        [NaughtyAttributes.ReorderableList][SerializeField] Page[] _pages = default;
 
-        private PageManager() {}
+        private PersistentUIManager() {}
         
         void Awake()
         {
@@ -20,14 +20,14 @@ namespace UnityCore.Page
         
         void Initialize()
         {
-            pageMap = new Dictionary<PageType, Page>();
-            if(pages == null) pages = new Page[0];
+            _pageMap = new Dictionary<PageType, Page>();
+            if(_pages == null) _pages = new Page[0];
             
             RegisterPages();
 
-            if(initialPage != PageType.None)
+            if(_initialPage != PageType.None)
             {
-                ShowPage(initialPage);
+                ShowPage(_initialPage);
             }
         }
         
@@ -78,7 +78,7 @@ namespace UnityCore.Page
 
         void RegisterPages()
         {
-            foreach(var page in pages)
+            foreach(var page in _pages)
             {
                 page.gameObject.SetActive(false);
                 RegisterPage(page);
@@ -87,25 +87,25 @@ namespace UnityCore.Page
 
         void RegisterPage(Page page)
         {
-            if(pageMap.ContainsKey(page.Type))
+            if(_pageMap.ContainsKey(page.Type))
             {
                 Debug.LogWarning($"Page [{page.Type.ToString()}] has already been registered");
                 return;
             }
 
-            pageMap.Add(page.Type, page);
+            _pageMap.Add(page.Type, page);
             Debug.Log($"Page [{page.Type.ToString()}] has been successfully registered");
         }
 
         Page GetPage(PageType type, string operation = "ACCESS")
         {
-            if(!pageMap.ContainsKey(type))
+            if(!_pageMap.ContainsKey(type))
             {
                 Debug.LogWarning($"You are trying to perform [{operation}] operation on a page [{type.ToString()}] that has not been registered");
                 return null;
             }
 
-            return pageMap[type];
+            return _pageMap[type];
         }
 
         public bool IsPageActive(PageType type)
@@ -113,7 +113,7 @@ namespace UnityCore.Page
             var page = GetPage(type);
             if(page == null) return false;
 
-            return pageMap[type].Active;
+            return _pageMap[type].Active;
         }
     }
 }
