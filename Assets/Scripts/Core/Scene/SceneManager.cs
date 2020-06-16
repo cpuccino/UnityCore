@@ -10,13 +10,13 @@ namespace UnityCore.Scene
 {
     public class SceneManager : Singleton<SceneManager>
     {
-        PageManager pageManager;
+        PersistentUIManager _persistentUIManager;
 
-        PageType targetPageType;
-        SceneType targetSceneType;
-        bool sceneIsLoading;
+        PageType _targetPageType;
+        SceneType _targetSceneType;
+        bool _sceneIsLoading;
 
-        Action<SceneType> onSceneLoadedCallback;
+        Action<SceneType> _onSceneLoadedCallback;
 
         void Awake()
         {
@@ -25,22 +25,22 @@ namespace UnityCore.Scene
 
         void Initialize()
         {  
-            pageManager = PageManager.Instance;
-      UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+            _persistentUIManager = PersistentUIManager.Instance;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         async void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
         {
-            if(targetSceneType == SceneType.None) return;
+            if(_targetSceneType == SceneType.None) return;
 
             var sceneType = (SceneType)Enum.Parse(typeof(SceneType), scene.name);
-            if(targetSceneType != sceneType) return;
+            if(_targetSceneType != sceneType) return;
 
-            if(onSceneLoadedCallback != null)
+            if(_onSceneLoadedCallback != null)
             {
                 try 
                 {
-                    onSceneLoadedCallback(sceneType);
+                    _onSceneLoadedCallback(sceneType);
                 } 
                 catch(Exception e)
                 {
@@ -50,28 +50,28 @@ namespace UnityCore.Scene
 
             await Task.Delay(1000);
 
-            pageManager.HidePage(targetPageType);
-            sceneIsLoading = false;
+            _persistentUIManager.HidePage(_targetPageType);
+            _sceneIsLoading = false;
         }
 
         IEnumerator LoadScene()
         {
-            pageManager.ShowPage(targetPageType);
-            if(targetPageType != PageType.None)
+            _persistentUIManager.ShowPage(_targetPageType);
+            if(_targetPageType != PageType.None)
             {
-                while(!pageManager.IsPageActive(targetPageType))
+                while(!_persistentUIManager.IsPageActive(_targetPageType))
                 {
                     yield return null;
                 }
             }
-      UnityEngine.SceneManagement.SceneManager.LoadScene(targetSceneType.ToString());
+            UnityEngine.SceneManagement.SceneManager.LoadScene(_targetSceneType.ToString());
         }
 
         bool SceneCanBeLoaded(SceneType scene, bool reload)
         {
-            if(sceneIsLoading)
+            if(_sceneIsLoading)
             {
-                Debug.LogWarning($"Unable to load scene [{scene.ToString()}]. Another scene [{targetSceneType.ToString()}] is in progress.");
+                Debug.LogWarning($"Unable to load scene [{scene.ToString()}]. Another scene [{_targetSceneType.ToString()}] is in progress.");
                 return false;
             }
             if(!Application.CanStreamedLevelBeLoaded(scene.ToString()))
@@ -81,7 +81,7 @@ namespace UnityCore.Scene
             }
             if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene.ToString() && !reload)
             {
-        Debug.LogWarning($"You are trying to load a scene [{scene.ToString()}] that's currently active");
+                Debug.LogWarning($"You are trying to load a scene [{scene.ToString()}] that's currently active");
                 return false;
             }
 
@@ -95,18 +95,18 @@ namespace UnityCore.Scene
 
         void Dispose()
         {
-      UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         public void Load(SceneType targetSceneType, Action<SceneType> onSceneLoadedCallback = null, bool reload = false, PageType loadingPageType = PageType.None)
         {
-            if(loadingPageType != PageType.None && pageManager == null) return;
+            if(loadingPageType != PageType.None && _persistentUIManager == null) return;
             if(!SceneCanBeLoaded(targetSceneType, reload)) return;
 
-            sceneIsLoading = true;
-            this.targetSceneType = targetSceneType;
-            this.targetPageType = loadingPageType;
-            this.onSceneLoadedCallback = onSceneLoadedCallback;
+            _sceneIsLoading = true;
+            _targetSceneType = targetSceneType;
+            _targetPageType = loadingPageType;
+            _onSceneLoadedCallback = onSceneLoadedCallback;
 
             StartCoroutine(LoadScene());
         }

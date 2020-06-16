@@ -2,7 +2,7 @@
 
 public class CoreSystem: MonoBehaviour
 {
-    public static UnityCore.Page.PageManager PageManager { get; private set; }
+    public static UnityCore.Page.PersistentUIManager PersistentUIManager { get; private set; }
 
     public static UnityCore.Audio.AudioManager AudioManager { get; private set; }
 
@@ -10,7 +10,7 @@ public class CoreSystem: MonoBehaviour
 
     void Awake()
     {
-        PageManager = UnityCore.Page.PageManager.Instance;
+        PersistentUIManager = UnityCore.Page.PersistentUIManager.Instance;
         AudioManager = UnityCore.Audio.AudioManager.Instance;
         SceneManager = UnityCore.Scene.SceneManager.Instance;
 

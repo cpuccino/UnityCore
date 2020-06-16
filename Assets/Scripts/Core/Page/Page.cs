@@ -12,29 +12,29 @@ namespace UnityCore.Page
     
     public class Page: MonoBehaviour
     {
-        Animator animator;
-        [SerializeField] PageType type = default;
-        [SerializeField] bool useAnimation = default;
+        Animator _animator;
+        [SerializeField] PageType _type = default;
+        [SerializeField] bool _useAnimation = default;
 
         public PageAnimationState AnimationState { get; private set; }
         public bool Active { get; private set; }
-        public PageType Type { get => type; set => type = value; }
-        public bool UseAnimation => useAnimation;
+        public PageType Type { get => _type; set => _type = value; }
+        public bool UseAnimation => _useAnimation;
 
         void OnEnable()
         {
-            animator = GetComponent<Animator>();
-            if(!animator) return;
+            _animator = GetComponent<Animator>();
+            if(!_animator) return;
 
-            animator.SetBool("on", false);
-            animator.enabled = UseAnimation;
+            _animator.SetBool("on", false);
+            _animator.enabled = UseAnimation;
         }
         
         public void Animate(bool transitionOn)
         {
-            if(UseAnimation && animator != null)
+            if(UseAnimation && _animator != null)
             {
-                animator.SetBool("on", transitionOn);
+                _animator.SetBool("on", transitionOn);
                 StopCoroutine(AwaitAnimation(transitionOn));
                 StartCoroutine(AwaitAnimation(transitionOn));
                 return;
@@ -46,12 +46,12 @@ namespace UnityCore.Page
         {
             AnimationState = transitionOn ? PageAnimationState.On : PageAnimationState.Off;
 
-            while(!animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationState.ToString()))
+            while(!_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationState.ToString()))
             {
                 yield return null;
             }
 
-            while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || animator.IsInTransition(0))
+            while(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || _animator.IsInTransition(0))
             {
                 yield return null;
             }

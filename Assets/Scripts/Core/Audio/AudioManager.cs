@@ -9,9 +9,9 @@ namespace UnityCore.Audio
 {
     public class AudioManager : Singleton<AudioManager>
     {
-        [NaughtyAttributes.ReorderableList][SerializeField] AudioTrack[] tracks = default;
-        Dictionary<AudioType, AudioTrack> tracksMap;
-        Dictionary<AudioType, IEnumerator> taskQueueMap;
+        [NaughtyAttributes.ReorderableList][SerializeField] AudioTrack[] _tracks = default;
+        Dictionary<AudioType, AudioTrack> _tracksMap;
+        Dictionary<AudioType, IEnumerator> _taskQueueMap;
 
         private AudioManager() {}
 
@@ -22,16 +22,16 @@ namespace UnityCore.Audio
 
         void Initialize()
         {
-            tracksMap = new Dictionary<AudioType, AudioTrack>();
-            taskQueueMap = new Dictionary<AudioType, IEnumerator>();
-            if(tracks == null) tracks = new AudioTrack[0];
+            _tracksMap = new Dictionary<AudioType, AudioTrack>();
+            _taskQueueMap = new Dictionary<AudioType, IEnumerator>();
+            if(_tracks == null) _tracks = new AudioTrack[0];
 
             RegisterTracks();
         }
 
         void RegisterTracks()
         {
-            foreach(var track in tracks)
+            foreach(var track in _tracks)
             {
                 RegisterTrack(track);
             }
@@ -41,37 +41,37 @@ namespace UnityCore.Audio
         {
             foreach (var audio in track.Audios)
             {
-                if(tracksMap.ContainsKey(audio.Type))
+                if(_tracksMap.ContainsKey(audio.Type))
                 {
                     Debug.LogWarning($"Audio [{audio.Type.ToString()}] has already been registered");
                     return;
                 }
 
-                tracksMap.Add(audio.Type, track);
+                _tracksMap.Add(audio.Type, track);
                 Debug.Log($"Audio [{audio.Type.ToString()}] has been successfully registered");
             }
         }
 
         AudioTrack GetAudioTrack(AudioType type, string operation = "ACCESS")
         {
-            if(!tracksMap.ContainsKey(type))
+            if(!_tracksMap.ContainsKey(type))
             {
                 Debug.LogWarning($"You are trying to perform [{operation}] operation on an audio track [{type.ToString()}] that has not been registered");
                 return null;
             }
 
-            return tracksMap[type];
+            return _tracksMap[type];
         }
 
         IEnumerator GetQueuedTask(AudioType type, string operation = "ACCESS")
         {
-            if(!taskQueueMap.ContainsKey(type))
+            if(!_taskQueueMap.ContainsKey(type))
             {
                 Debug.LogWarning($"You are trying to perform [{operation}] operation on an queued task [{type.ToString()}] that doesn't exist");
                 return null;
             }
 
-            return taskQueueMap[type];
+            return _taskQueueMap[type];
         }
 
         AudioClip GetAudioClipFromTrack(AudioType type, AudioTrack track, string operation = "ACCESS")
@@ -93,7 +93,7 @@ namespace UnityCore.Audio
             RemoveConflictingTaskInQueue(task.Type);
 
             var taskRunner = RunAudioTask(task);
-            taskQueueMap.Add(task.Type, taskRunner);
+            _taskQueueMap.Add(task.Type, taskRunner);
 
             StartCoroutine(taskRunner);
 
@@ -102,9 +102,9 @@ namespace UnityCore.Audio
         
         void RemoveConflictingTaskInQueue(AudioType type)
         {
-            if(taskQueueMap.ContainsKey(type)) RemoveAudioTask(type);
+            if(_taskQueueMap.ContainsKey(type)) RemoveAudioTask(type);
 
-            var taskQueueMapKeys = taskQueueMap.Keys.ToArray();
+            var taskQueueMapKeys = _taskQueueMap.Keys.ToArray();
 
             foreach(var audioType in taskQueueMapKeys)
             {
@@ -126,7 +126,7 @@ namespace UnityCore.Audio
             if(audioTask == null) return;
 
             StopCoroutine(audioTask);
-            taskQueueMap.Remove(type);
+            _taskQueueMap.Remove(type);
         }
 
         IEnumerator RunAudioTask(AudioTask task)
@@ -143,10 +143,10 @@ namespace UnityCore.Audio
                 { 
                     if(task.Action == AudioTaskAction.Stop) audioTrack.Source.Stop();
 
-                    var queuedTasks = taskQueueMap.ToArray().Aggregate("", (acc, curr) => acc + $"[{curr.Key.ToString()}] ");
-                    taskQueueMap.Remove(task.Type);
-                    if(taskQueueMap.Count > 0) Debug.Log($"Task: {queuedTasks}");
-                    Debug.Log($"Queued tasks: {taskQueueMap.Count}");
+                    var queuedTasks = _taskQueueMap.ToArray().Aggregate("", (acc, curr) => acc + $"[{curr.Key.ToString()}] ");
+                    _taskQueueMap.Remove(task.Type);
+                    if(_taskQueueMap.Count > 0) Debug.Log($"Task: {queuedTasks}");
+                    Debug.Log($"Queued tasks: {_taskQueueMap.Count}");
                 }
             ));
         }
@@ -192,8 +192,8 @@ namespace UnityCore.Audio
 
         void OnDisable()
         {
-            if(taskQueueMap == null) return;
-            foreach(var task in taskQueueMap)
+            if(_taskQueueMap == null) return;
+            foreach(var task in _taskQueueMap)
             {
                 StopCoroutine(task.Value);
             }

@@ -6,18 +6,18 @@ namespace UnityCore.Utilities
     public abstract class MaterialColorBase
     {
         public Color32 Primary { get; }
-        Dictionary<int, Color32> swatch;
+        Dictionary<int, Color32> _swatch;
 
         protected Color32 GetSwatchColor(int index)
         {
-            var color = swatch.ContainsKey(index) ? swatch[index] : Primary;
+            var color = _swatch.ContainsKey(index) ? _swatch[index] : Primary;
             return color;
         }
 
         public MaterialColorBase(Color32 primary, Dictionary<int, Color32> swatch)
         {
-            this.Primary = primary;
-            this.swatch = swatch;
+            Primary = primary;
+            _swatch = swatch;
         }
 
         public Color32 this[int key] 

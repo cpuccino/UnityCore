@@ -4,21 +4,21 @@ namespace UnityCore.Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static object singletonLock = new object();
-        private static bool destroyed = false;
-        private static T instance;
+        private static object _singletonLock = new object();
+        private static bool _destroyed = false;
+        private static T _instance;
 
         public static T Instance
         {
             get
             {
-                if(destroyed)
+                if(_destroyed)
                 {
                     Debug.LogWarning($"[Singleton] Instance {typeof(T)} already destroyed. Returning null");
                     return null;
                 }
 
-                lock(singletonLock)
+                lock(_singletonLock)
                 {
                     var singleton = GetOrCreateSingleton();
                     singleton.name = $"{typeof(T).Name} (Singleton)";
@@ -29,25 +29,25 @@ namespace UnityCore.Utilities
 
         static T GetOrCreateSingleton()
         {
-            if(instance != null) return instance;
+            if(_instance != null) return _instance;
 
-            instance = (T)FindObjectOfType(typeof(T));
-            if(instance != null) return instance;
+            _instance = (T)FindObjectOfType(typeof(T));
+            if(_instance != null) return _instance;
 
             var gameobject = new GameObject();
-            instance = gameobject.AddComponent<T>();
+            _instance = gameobject.AddComponent<T>();
 
-            return instance;
+            return _instance;
         }
 
         void OnApplicationQuit() 
         {
-            destroyed = true;
+            _destroyed = true;
         }
 
         void OnDestroy()
         {
-            destroyed = true;
+            _destroyed = true;
         }
     }
 }
