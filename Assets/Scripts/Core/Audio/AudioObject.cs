@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Ukiyo.Unity.Core.Audio
+namespace UnityCore.Audio
 {
     [Serializable]
     public class AudioObject

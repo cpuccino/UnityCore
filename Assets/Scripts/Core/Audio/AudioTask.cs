@@ -1,4 +1,4 @@
-﻿namespace Ukiyo.Unity.Core.Audio
+﻿namespace UnityCore.Audio
 {
     public enum AudioTaskAction
     {
