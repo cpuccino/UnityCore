@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1448967554}
   - component: {fileID: 1448967555}
+  - component: {fileID: 437541532}
   m_Layer: 0
   m_Name: Soundtrack
   m_TagString: Untagged
@@ -127,6 +128,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &437541532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448967553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d50bbd10a7faf14b9eb88c1a2a8c554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audios:
+  - type: 1
+    clip: {fileID: 8300000, guid: d2bee5581813dc84a9966816c6ad3887, type: 3}
+  - type: 2
+    clip: {fileID: 8300000, guid: 83d3b72e4072b8e41b22458700626878, type: 3}
 --- !u!1 &1803629398
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803629399}
   - component: {fileID: 1803629400}
+  - component: {fileID: 520925636}
   m_Layer: 0
   m_Name: SoundFX
   m_TagString: Untagged
@@ -254,6 +273,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &520925636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803629398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d50bbd10a7faf14b9eb88c1a2a8c554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audios:
+  - type: 1001
+    clip: {fileID: 8300000, guid: 10f3eea9277cace4b909180d5d289cc6, type: 3}
+  - type: 1051
+    clip: {fileID: 8300000, guid: ad20fcb913336a74cb46584f151a9ce3, type: 3}
 --- !u!1 &897613617905597120
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,15 +336,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tracks:
-  - source: {fileID: 1448967555}
-    audios:
-    - type: 0
-      clip: {fileID: 8300000, guid: d2bee5581813dc84a9966816c6ad3887, type: 3}
-    - type: 1
-      clip: {fileID: 8300000, guid: b995a331bc28d49439166e381fb50c74, type: 3}
-  - source: {fileID: 1803629400}
-    audios:
-    - type: 1000
-      clip: {fileID: 8300000, guid: ad20fcb913336a74cb46584f151a9ce3, type: 3}
-    - type: 1050
-      clip: {fileID: 8300000, guid: 10f3eea9277cace4b909180d5d289cc6, type: 3}
+  - {fileID: 437541532}
+  - {fileID: 520925636}

@@ -9,9 +9,11 @@ namespace UnityCore.Audio
 {
     public class AudioController : Singleton<AudioController>
     {
-        [NaughtyAttributes.ReorderableList][SerializeField] AudioTrack[] tracks;
+        [NaughtyAttributes.ReorderableList][SerializeField] AudioTrack[] tracks = default;
         Dictionary<AudioType, AudioTrack> tracksMap;
         Dictionary<AudioType, IEnumerator> taskQueueMap;
+
+        private AudioController() {}
 
         void Awake()
         {
@@ -142,7 +144,7 @@ namespace UnityCore.Audio
 
                     var queuedTasks = taskQueueMap.ToArray().Aggregate("", (acc, curr) => acc + $"[{curr.Key.ToString()}] ");
                     taskQueueMap.Remove(task.Type);
-                    Debug.Log($"Task: {queuedTasks}");
+                    if(taskQueueMap.Count > 0) Debug.Log($"Task: {queuedTasks}");
                     Debug.Log($"Queued tasks: {taskQueueMap.Count}");
                 }
             ));

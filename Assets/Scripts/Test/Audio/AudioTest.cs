@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
-namespace Ukiyo.Unity.Core.Audio
+namespace UnityCore.Audio
 {
     public class AudioTest : MonoBehaviour
     {
-        [SerializeField] AudioController audioController;
+        [SerializeField] AudioController audioController = default;
 
-        [SerializeField] AudioType audioType0;
-        [SerializeField] AudioType audioType1;
+        [SerializeField] AudioType audioType0 = default;
+        [SerializeField] AudioType audioType1 = default;
 
-        [SerializeField] float delay;
-        [SerializeField] float fadeDuration;
+        [SerializeField] float delay = default;
+        [SerializeField] float fadeDuration = default;
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         void Update()
         {
             HandleAudio0Input();
@@ -54,6 +54,6 @@ namespace Ukiyo.Unity.Core.Audio
                 audioController.RestartAudio(audioType1);
             }
         }
-        #endif
+#endif
     }
 }

@@ -1,20 +1,56 @@
 using UnityEngine;
-using System;
 
 namespace UnityCore.Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static readonly Lazy<T> lazyInstance = new Lazy<T>(CreateSingleton);
+        private static object singletonLock = new object();
+        private static bool destroyed = false;
+        private static T instance;
 
-        public static T Instance => lazyInstance.Value;
-
-        private static T CreateSingleton()
+        public static T Instance
         {
-            var gameobject = new GameObject($"{typeof(T).Name} (singleton)");
-            var instance = gameobject.AddComponent<T>();
+            get
+            {
+                if(destroyed)
+                {
+                    Debug.LogWarning($"[Singleton] Instance {typeof(T)} already destroyed. Returning null");
+                    return null;
+                }
+
+                lock(singletonLock)
+                {
+                    var singleton = GetOrCreateSingleton();
+                    singleton.name = $"{typeof(T).Name} (singleton)";
+                    return singleton;
+                }
+            }
+        }
+
+        static T GetOrCreateSingleton()
+        {
+            if(instance != null) return instance;
+
+            instance = (T)FindObjectOfType(typeof(T));
+            if(instance != null) return instance;
+
+            Debug.Log($"initializing singleton {typeof(T).Name}");
+
+            var gameobject = new GameObject();
+            instance = gameobject.AddComponent<T>();
             DontDestroyOnLoad(gameobject);
+
             return instance;
+        }
+
+        void OnApplicationQuit() 
+        {
+            destroyed = true;
+        }
+
+        void OnDestroy()
+        {
+            destroyed = true;
         }
     }
 }

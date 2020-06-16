@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioController: {fileID: 0}
   audioType0: 1
-  audioType1: 1050
+  audioType1: 1001
   delay: 0
   fadeDuration: 0
 --- !u!1 &7950068513237010326
@@ -129,5 +129,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pageController: {fileID: 0}
-  pageType0: 1000
-  pageType1: 2000
+  pageType0: 1001
+  pageType1: 2001

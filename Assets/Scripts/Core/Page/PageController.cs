@@ -7,12 +7,12 @@ namespace UnityCore.Page
 {
     public class PageController : Singleton<PageController>
     {
-        static PageController instance;
-
         Dictionary<PageType, Page> pageMap;
-        [SerializeField] PageType initialPage;
-        [NaughtyAttributes.ReorderableList][SerializeField] Page[] pages;
+        [SerializeField] PageType initialPage = default;
+        [NaughtyAttributes.ReorderableList][SerializeField] Page[] pages = default;
 
+        private PageController() {}
+        
         void Awake()
         {
             Initialize();
