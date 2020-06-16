@@ -7,13 +7,13 @@ using System.Linq;
 
 namespace UnityCore.Audio
 {
-    public class AudioController : Singleton<AudioController>
+    public class AudioManager : Singleton<AudioManager>
     {
         [NaughtyAttributes.ReorderableList][SerializeField] AudioTrack[] tracks = default;
         Dictionary<AudioType, AudioTrack> tracksMap;
         Dictionary<AudioType, IEnumerator> taskQueueMap;
 
-        private AudioController() {}
+        private AudioManager() {}
 
         void Awake()
         {

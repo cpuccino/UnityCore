@@ -7,7 +7,7 @@ namespace UnityCore.Page
     // Replace with automated tests
     public class PageTest : MonoBehaviour
     {
-        [SerializeField] PageController pageController = default;
+        [SerializeField] PageManager pageManager = default;
 
         [SerializeField] PageType pageType0 = default;
         [SerializeField] PageType pageType1 = default;
@@ -28,7 +28,7 @@ namespace UnityCore.Page
                 var pageTypes = Enum.GetValues(typeof(PageType)).Cast<PageType>().ToArray();
                 foreach (var pageType in pageTypes)
                 {
-                    pageController.HidePage(pageType);
+                    pageManager.HidePage(pageType);
                 }
             }
         }
@@ -40,12 +40,12 @@ namespace UnityCore.Page
             if(Input.GetKeyUp(KeyCode.Q))
             {
                 Debug.Log($"Showing {pageType0.ToString()}");
-                pageController.ShowPage(pageType0);
+                pageManager.ShowPage(pageType0);
             }
             if(Input.GetKeyUp(KeyCode.W))
             {
                 Debug.Log($"Hiding {pageType0.ToString()}");
-                pageController.HidePage(pageType0);
+                pageManager.HidePage(pageType0);
             }
         }
 
@@ -56,17 +56,17 @@ namespace UnityCore.Page
             if(Input.GetKeyUp(KeyCode.E))
             {
                 Debug.Log($"Hiding {pageType0.ToString()}, then Showing {pageType1.ToString()}");
-                pageController.HidePage(pageType0, pageType1);
+                pageManager.HidePage(pageType0, pageType1);
             }
             if(Input.GetKeyUp(KeyCode.R))
             {
                 Debug.Log($"Hiding {pageType0.ToString()}, Wait, then Showing {pageType1.ToString()}");
-                pageController.HidePage(pageType0, pageType1, true);
+                pageManager.HidePage(pageType0, pageType1, true);
             }
             if(Input.GetKeyUp(KeyCode.T))
             {
                 Debug.Log($"Hiding {pageType1.ToString()}");
-                pageController.HidePage(pageType1);
+                pageManager.HidePage(pageType1);
             }
         }
 #endif

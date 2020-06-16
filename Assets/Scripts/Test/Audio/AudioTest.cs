@@ -5,7 +5,7 @@ namespace UnityCore.Audio
     // Replace with automated tests
     public class AudioTest : MonoBehaviour
     {
-        [SerializeField] AudioController audioController = default;
+        [SerializeField] AudioManager audioManager = default;
 
         [SerializeField] AudioType audioType0 = default;
         [SerializeField] AudioType audioType1 = default;
@@ -28,15 +28,15 @@ namespace UnityCore.Audio
             
             if(Input.GetKeyUp(KeyCode.A))
             {
-                audioController.PlayAudio(audioType0, audioTaskOptions);
+                audioManager.PlayAudio(audioType0, audioTaskOptions);
             }
             if(Input.GetKeyUp(KeyCode.S))
             {
-                audioController.StopAudio(audioType0, audioTaskOptions);
+                audioManager.StopAudio(audioType0, audioTaskOptions);
             }
             if(Input.GetKeyUp(KeyCode.D))
             {
-                audioController.RestartAudio(audioType0);
+                audioManager.RestartAudio(audioType0);
             }
         }
 
@@ -44,15 +44,15 @@ namespace UnityCore.Audio
         {
             if(Input.GetKeyUp(KeyCode.F))
             {
-                audioController.PlayAudio(audioType1);
+                audioManager.PlayAudio(audioType1);
             }
             if(Input.GetKeyUp(KeyCode.G))
             {
-                audioController.StopAudio(audioType1);
+                audioManager.StopAudio(audioType1);
             }
             if(Input.GetKeyUp(KeyCode.H))
             {
-                audioController.RestartAudio(audioType1);
+                audioManager.RestartAudio(audioType1);
             }
         }
 #endif

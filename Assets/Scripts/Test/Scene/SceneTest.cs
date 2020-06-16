@@ -6,7 +6,7 @@ namespace UnityCore.Scene
     // Replace with automated tests
     public class SceneTest : MonoBehaviour
     {
-        [SerializeField] SceneController sceneController = default;
+        [SerializeField] SceneManager sceneManager = default;
 
         [SerializeField] SceneType sceneType0 = default;
         [SerializeField] SceneType sceneType1 = default;
@@ -22,7 +22,7 @@ namespace UnityCore.Scene
         {
             if(Input.GetKeyUp(KeyCode.Z))
             {
-                sceneController.Load(SceneType.Menu);
+                sceneManager.Load(SceneType.Menu);
             }
         }
 
@@ -30,7 +30,7 @@ namespace UnityCore.Scene
         {
             if(Input.GetKeyUp(KeyCode.X))
             {
-                sceneController.Load(SceneType.Level, scene => 
+                sceneManager.Load(SceneType.Level, scene => 
                 {
                     Debug.Log($"Scene [{scene}] finished loading");
                 }, 
