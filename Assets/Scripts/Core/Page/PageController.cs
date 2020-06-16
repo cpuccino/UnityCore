@@ -16,7 +16,6 @@ namespace UnityCore.Page
         void Awake()
         {
             Initialize();
-            DontDestroyOnLoad(gameObject);
         }
         
         void Initialize()

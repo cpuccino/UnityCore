@@ -1,5 +1,6 @@
 ﻿namespace UnityCore.Scene
 {
+    // Scene types should match scene names in build settings
     public enum SceneType 
     {
         // Scene null state
@@ -8,7 +9,7 @@
         // Menu scene
         Menu = 1,
 
-        // Game Scenes
-        Game = 1001
+        // Level Scenes
+        Level = 1001
     }
 }

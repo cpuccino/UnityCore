@@ -30,7 +30,7 @@ namespace UnityCore.Scene
         {
             if(Input.GetKeyUp(KeyCode.X))
             {
-                sceneController.Load(SceneType.Game, scene => 
+                sceneController.Load(SceneType.Level, scene => 
                 {
                     Debug.Log($"Scene [{scene}] finished loading");
                 }, 
