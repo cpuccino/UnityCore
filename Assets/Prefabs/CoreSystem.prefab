@@ -54,11 +54,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8100224182212191360}
     m_Modifications:
+    - target: {fileID: 437541532, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 437541532, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.data[0]._type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 437541532, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.data[0]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d2bee5581813dc84a9966816c6ad3887, type: 3}
+    - target: {fileID: 437541532, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.data[1]._type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 437541532, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.data[1]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b995a331bc28d49439166e381fb50c74, type: 3}
+    - target: {fileID: 520925636, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 520925636, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.data[0]._type
+      value: 1001
+      objectReference: {fileID: 0}
+    - target: {fileID: 520925636, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.data[0]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 10f3eea9277cace4b909180d5d289cc6, type: 3}
+    - target: {fileID: 520925636, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.data[1]._type
+      value: 1051
+      objectReference: {fileID: 0}
+    - target: {fileID: 520925636, guid: 02560f790c295134aaa577c09a871ba4, type: 3}
+      propertyPath: _audios.Array.data[1]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ad20fcb913336a74cb46584f151a9ce3, type: 3}
     - target: {fileID: 897613617905597120, guid: 02560f790c295134aaa577c09a871ba4,
         type: 3}
       propertyPath: m_Name
-      value: AudioController
+      value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 897613617905597121, guid: 02560f790c295134aaa577c09a871ba4,
+        type: 3}
+      propertyPath: _tracks.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 897613617905597121, guid: 02560f790c295134aaa577c09a871ba4,
+        type: 3}
+      propertyPath: _tracks.Array.data[0]
+      value: 
+      objectReference: {fileID: 478941089929124535}
+    - target: {fileID: 897613617905597121, guid: 02560f790c295134aaa577c09a871ba4,
+        type: 3}
+      propertyPath: _tracks.Array.data[1]
+      value: 
+      objectReference: {fileID: 478941089844736495}
     - target: {fileID: 897613617905597126, guid: 02560f790c295134aaa577c09a871ba4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -134,6 +189,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd01bcee06d4794e80e394f6a1fdca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &478941089929124535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 437541532, guid: 02560f790c295134aaa577c09a871ba4,
+    type: 3}
+  m_PrefabInstance: {fileID: 478941089559216171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d50bbd10a7faf14b9eb88c1a2a8c554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &478941089844736495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 520925636, guid: 02560f790c295134aaa577c09a871ba4,
+    type: 3}
+  m_PrefabInstance: {fileID: 478941089559216171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d50bbd10a7faf14b9eb88c1a2a8c554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3751177137948749769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,10 +220,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8100224182212191360}
     m_Modifications:
+    - target: {fileID: 804085529, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
+      propertyPath: m_Name
+      value: StartMenuPage
+      objectReference: {fileID: 0}
+    - target: {fileID: 804085529, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 804085533, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
+      propertyPath: _type
+      value: 1001
+      objectReference: {fileID: 0}
+    - target: {fileID: 994572482, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
+      propertyPath: m_Name
+      value: LoadingPage
+      objectReference: {fileID: 0}
+    - target: {fileID: 994572482, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 994572483, guid: 70f4231800a14a84f9d96b8f819473a9, type: 3}
+      propertyPath: _type
+      value: 2001
+      objectReference: {fileID: 0}
     - target: {fileID: 4689247319177661214, guid: 70f4231800a14a84f9d96b8f819473a9,
         type: 3}
       propertyPath: m_Name
-      value: PageController
+      value: PersistentUIManager
       objectReference: {fileID: 0}
     - target: {fileID: 6564238494369585151, guid: 70f4231800a14a84f9d96b8f819473a9,
         type: 3}
@@ -341,7 +444,7 @@ PrefabInstance:
     - target: {fileID: 5499948202916659615, guid: ffdfd0c9fe83a1f46a51a089652e7f75,
         type: 3}
       propertyPath: m_Name
-      value: SceneController
+      value: SceneManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffdfd0c9fe83a1f46a51a089652e7f75, type: 3}
@@ -372,7 +475,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1478751485, guid: 5648a9a9a7f8d12469c3b70d3d9edf01, type: 3}
       propertyPath: m_Name
-      value: SceneTest
+      value: SceneManagerTest
       objectReference: {fileID: 0}
     - target: {fileID: 1478751487, guid: 5648a9a9a7f8d12469c3b70d3d9edf01, type: 3}
       propertyPath: sceneController
@@ -382,10 +485,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1478751487, guid: 5648a9a9a7f8d12469c3b70d3d9edf01, type: 3}
+      propertyPath: _sceneManager
+      value: 
+      objectReference: {fileID: 779541331955570995}
+    - target: {fileID: 1478751487, guid: 5648a9a9a7f8d12469c3b70d3d9edf01, type: 3}
+      propertyPath: _sceneType0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478751487, guid: 5648a9a9a7f8d12469c3b70d3d9edf01, type: 3}
+      propertyPath: _sceneType1
+      value: 1001
+      objectReference: {fileID: 0}
     - target: {fileID: 260737906671063341, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
         type: 3}
       propertyPath: m_Name
-      value: AudioTest
+      value: AudioManagerTest
       objectReference: {fileID: 0}
     - target: {fileID: 4536930389295011372, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
         type: 3}
@@ -400,6 +515,26 @@ PrefabInstance:
     - target: {fileID: 4536930389295011372, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
         type: 3}
       propertyPath: fadeDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536930389295011372, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
+        type: 3}
+      propertyPath: _audioManager
+      value: 
+      objectReference: {fileID: 779541332968667882}
+    - target: {fileID: 4536930389295011372, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
+        type: 3}
+      propertyPath: _audioType0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536930389295011372, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
+        type: 3}
+      propertyPath: _audioType1
+      value: 1001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536930389295011372, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
+        type: 3}
+      propertyPath: _fadeDuration
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7950068513237010325, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
@@ -487,10 +622,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7950068514397625965, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
+        type: 3}
+      propertyPath: _persistentUIManager
+      value: 
+      objectReference: {fileID: 7319203077776246813}
+    - target: {fileID: 7950068514397625965, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
+        type: 3}
+      propertyPath: _pageType0
+      value: 1001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950068514397625965, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
+        type: 3}
+      propertyPath: _pageType1
+      value: 2001
+      objectReference: {fileID: 0}
     - target: {fileID: 7950068514397625967, guid: 5648a9a9a7f8d12469c3b70d3d9edf01,
         type: 3}
       propertyPath: m_Name
-      value: PageTest
+      value: PersistentUIManagerTest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5648a9a9a7f8d12469c3b70d3d9edf01, type: 3}
