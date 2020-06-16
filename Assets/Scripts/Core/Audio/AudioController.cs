@@ -192,6 +192,7 @@ namespace UnityCore.Audio
 
         void OnDisable()
         {
+            if(taskQueueMap != null) return;
             foreach(var task in taskQueueMap)
             {
                 StopCoroutine(task.Value);
