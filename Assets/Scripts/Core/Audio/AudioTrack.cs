@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Ukiyo.Unity.Core.Audio
+namespace UnityCore.Audio
 {
     public class AudioTrack: MonoBehaviour
     {

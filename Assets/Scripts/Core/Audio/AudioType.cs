@@ -1,4 +1,4 @@
-﻿namespace Ukiyo.Unity.Core.Audio
+﻿namespace UnityCore.Audio
 {
     // Format (grouping)_(type)_(action?)
     // Grouping has gaps to allow for sub elements and subgrouping

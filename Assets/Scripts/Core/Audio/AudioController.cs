@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ukiyo.Unity.Core.Utilities;
+using UnityCore.Utilities;
 using System.Linq;
 
-namespace Ukiyo.Unity.Core.Audio
+namespace UnityCore.Audio
 {
     public class AudioController : Singleton<AudioController>
     {

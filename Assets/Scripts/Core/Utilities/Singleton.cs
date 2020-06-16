@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace Ukiyo.Unity.Core.Utilities
+namespace UnityCore.Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-﻿namespace Ukiyo.Unity.Core.Page
+﻿namespace UnityCore.Page
 {
     public enum PageType
     {

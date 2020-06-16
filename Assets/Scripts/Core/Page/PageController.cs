@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ukiyo.Unity.Core.Utilities;
-using NaughtyAttributes;
+using UnityCore.Utilities;
 
-namespace Ukiyo.Unity.Core.Page
+namespace UnityCore.Page
 {
     public class PageController : Singleton<PageController>
     {

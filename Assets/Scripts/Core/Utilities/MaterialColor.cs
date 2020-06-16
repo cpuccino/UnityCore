@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace Ukiyo.Unity.Core.Utilities
+namespace UnityCore.Utilities
 {
     public abstract class MaterialColorBase
     {

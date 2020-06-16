@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Ukiyo.Unity.Core.Page
+namespace UnityCore.Page
 {
     // Whether the page is transitioning on, off or neutral
     // Must match the animation state
