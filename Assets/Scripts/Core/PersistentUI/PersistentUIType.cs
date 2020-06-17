@@ -14,7 +14,10 @@
         // Loading persistent UI and components
         Loading = 2001,
 
+        // Pause persistent UI and components
+        Pause = 3001,
+
         // Restart persistent UI and components
-        Restart = 3001
+        Restart = 4001
     }
 }

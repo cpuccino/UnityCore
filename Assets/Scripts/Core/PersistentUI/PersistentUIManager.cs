@@ -103,7 +103,7 @@ namespace UnityCore.PersistentUI
         {
             if (!_persistentUIMap.ContainsKey(type))
             {
-                Debug.LogWarning($"You are trying to perform [{operation}] operation on a Persistent UI [{type.ToString()}] that has not been registered");
+                Debug.LogError($"You are trying to perform [{operation}] operation on a Persistent UI [{type.ToString()}] that has not been registered");
                 return null;
             }
 
