@@ -1,6 +1,5 @@
 using System;
 using UnityCore.Utilities;
-using UnityEngine;
 
 namespace UnityCore.Session
 {

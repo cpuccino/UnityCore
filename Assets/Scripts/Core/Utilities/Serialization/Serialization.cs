@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace UnityCore.Utilities.Serialization
 {
-    public class SerializationManager
+    public class Serialization
     {
-        public bool Save(string path, string filename, object data)
+        public static bool Save(string path, string filename, object data)
         {
             var formatter = GetBinaryFormatter();
 
@@ -33,7 +33,7 @@ namespace UnityCore.Utilities.Serialization
             return true;
         }
 
-        public object Load(string filePath)
+        public static object Load(string filePath)
         {
             var formatter = GetBinaryFormatter();
 
@@ -57,7 +57,7 @@ namespace UnityCore.Utilities.Serialization
             }
         }
 
-        private BinaryFormatter GetBinaryFormatter()
+        private static BinaryFormatter GetBinaryFormatter()
         {
             var formatter = new BinaryFormatter();
 
@@ -66,7 +66,7 @@ namespace UnityCore.Utilities.Serialization
             return formatter;
         }
 
-        private SurrogateSelector CreateSurrogates()
+        private static SurrogateSelector CreateSurrogates()
         {
             var selector = new SurrogateSelector();
 
