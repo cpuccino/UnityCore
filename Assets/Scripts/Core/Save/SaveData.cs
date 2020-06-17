@@ -8,7 +8,7 @@ namespace UnityCore.Utilities.Serialization
         private static object _singletonLock = new object();
         private static SaveData _instance;
 
-        public static SaveData Current
+        public static SaveData Instance
         {
             get
             {
@@ -21,10 +21,10 @@ namespace UnityCore.Utilities.Serialization
             }
         }
 
-        // Initialize values in constructor
-        // Replace Current with the appropriate savedata on game load
-        private SaveData() { }
+        private SaveData() {}
 
+        // Initialize values / save data in the constructor
+        // Replace Instance with the the loaded data if it exists
         // Add Save data properties
     }
 }

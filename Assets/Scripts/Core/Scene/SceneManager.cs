@@ -13,8 +13,8 @@ namespace UnityCore.Scene
         [SerializeField] private float _sceneLoadDelay = default;
 
         private PersistentUIManager _persistentUIManager;
-
         private PersistentUIType _targetPersistentUIType;
+
         private SceneType _targetSceneType;
         private bool _sceneIsLoading;
 
@@ -46,7 +46,7 @@ namespace UnityCore.Scene
                 }
                 catch (Exception e)
                 {
-                    Debug.LogWarning($"Unable to run the callback after [{sceneType.ToString()}] was loaded. {System.Environment.NewLine}{e.Message}");
+                    Debug.LogError($"Unable to run the callback after [{sceneType.ToString()}] was loaded. {System.Environment.NewLine}{e.Message}");
                 }
             }
 
@@ -73,17 +73,17 @@ namespace UnityCore.Scene
         {
             if (_sceneIsLoading)
             {
-                Debug.LogWarning($"Unable to load scene [{scene.ToString()}]. Another scene [{_targetSceneType.ToString()}] is in progress.");
+                Debug.LogError($"Unable to load scene [{scene.ToString()}]. Another scene [{_targetSceneType.ToString()}] is in progress.");
                 return false;
             }
             if (!Application.CanStreamedLevelBeLoaded(scene.ToString()))
             {
-                Debug.LogWarning($"Invalid scene name [{scene.ToString()}]");
+                Debug.LogError($"Invalid scene name [{scene.ToString()}]");
                 return false;
             }
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene.ToString() && !reload)
             {
-                Debug.LogWarning($"You are trying to load a scene [{scene.ToString()}] that's currently active");
+                Debug.LogError($"You are trying to load a scene [{scene.ToString()}] that's currently active");
                 return false;
             }
 
