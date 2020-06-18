@@ -742,6 +742,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8100224182212191360}
     m_Modifications:
+    - target: {fileID: 3309161697140634, guid: c08e2dc2a6d7a394db4a7e2c06d9107d, type: 3}
+      propertyPath: pauseOnLoseFocus
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2761268886930679107, guid: c08e2dc2a6d7a394db4a7e2c06d9107d,
         type: 3}
       propertyPath: m_LocalPosition.x

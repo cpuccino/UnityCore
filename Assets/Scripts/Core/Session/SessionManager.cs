@@ -1,16 +1,19 @@
 using System;
 using UnityCore.Utilities;
+using UnityEngine;
 
 namespace UnityCore.Session
 {
     public class SessionManager : SingletonBehaviour<SessionManager>
     {
+        [SerializeField] bool pauseOnLoseFocus = default;
+
         public long SessionStartTime { get; private set; }
         public bool Paused { get; private set; }
 
-        public event Action OnSessionPaused;
+        public event Action OnSessionPaused = default;
 
-        public event Action OnSessionResumed;
+        public event Action OnSessionResumed = default;
 
         private void Awake()
         {
@@ -31,7 +34,7 @@ namespace UnityCore.Session
 
         private void OnApplicationFocus(bool focus)
         {
-            if (!focus) PauseSession();
+            if (!focus && pauseOnLoseFocus) PauseSession();
         }
 
         public void PauseSession()
