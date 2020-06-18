@@ -9,9 +9,9 @@ namespace UnityCore.Session
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                if(!CoreSystem.SessionManager.Paused) CoreSystem.SessionManager.PauseSession();
+                if (!CoreSystem.SessionManager.Paused) CoreSystem.SessionManager.PauseSession();
                 else CoreSystem.SessionManager.ResumeSession();
             }
         }
