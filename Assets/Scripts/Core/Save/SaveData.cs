@@ -21,7 +21,9 @@ namespace UnityCore.Utilities.Serialization
             }
         }
 
-        private SaveData() {}
+        private SaveData()
+        {
+        }
 
         // Initialize values / save data in the constructor
         // Replace Instance with the the loaded data if it exists

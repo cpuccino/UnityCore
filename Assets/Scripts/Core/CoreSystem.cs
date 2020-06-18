@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityCore.PersistentUI;
+﻿using UnityCore.PersistentUI;
+using UnityEngine;
 
 namespace UnityCore
 {
@@ -8,7 +8,7 @@ namespace UnityCore
         public static UnityCore.Audio.AudioManager AudioManager { get; private set; }
 
         public static UnityCore.Scene.SceneManager SceneManager { get; private set; }
-        
+
         public static UnityCore.Session.SessionManager SessionManager { get; private set; }
 
         public static UnityCore.PersistentUI.PersistentUIManager PersistentUIManager { get; private set; }
@@ -50,13 +50,13 @@ namespace UnityCore
             SessionManager.OnSessionResumed += HandleOnSessionResumed;
         }
 
-        void Unsubscribe()
+        private void Unsubscribe()
         {
             SessionManager.OnSessionPaused -= HandleOnSessionPaused;
             SessionManager.OnSessionResumed -= HandleOnSessionResumed;
         }
 
-        void HandleOnSessionPaused()
+        private void HandleOnSessionPaused()
         {
             Time.timeScale = 0;
             PersistentUIManager.ShowPersistentUI(PersistentUIType.Pause);
@@ -64,15 +64,15 @@ namespace UnityCore
             Debug.Log("Session is paused, reverting timeScale to 0");
         }
 
-        void HandleOnSessionResumed()
+        private void HandleOnSessionResumed()
         {
             Time.timeScale = TimeScale;
             PersistentUIManager.HidePersistentUI(PersistentUIType.Pause);
 
             Debug.Log($"Session is resumed, reverting timeScale to {TimeScale}");
         }
-        
-        void OnDestroy() 
+
+        private void OnDestroy()
         {
             Unsubscribe();
         }
